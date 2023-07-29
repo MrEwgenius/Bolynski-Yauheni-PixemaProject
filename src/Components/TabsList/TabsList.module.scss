@@ -1,0 +1,11 @@
+@import "/src/styles/colors.scss";
+@import "/src/styles/mixin.scss";
+
+.tabsContainer {
+    @include flexCentr;
+    border-radius: 10px;
+    height: 56px;
+    width: 438px;
+    background-color: $graphite;
+    display: flex;
+}

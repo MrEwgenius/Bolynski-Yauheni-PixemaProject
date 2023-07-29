@@ -1,0 +1,58 @@
+@import "src/styles/colors";
+
+.input {
+    padding: 16px 20px;
+    background-color: $graphite;
+    border: 2px solid transparent;
+    outline: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: $white;
+    border-radius: 10px;
+    resize: none;
+    width: 100%;
+
+    &:focus {
+        border-color: $primary;
+    }
+    &:active {
+        border: 2px solid transparent;
+    }
+    &::placeholder {
+        color: $secondary;
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    background-color: $secondary;
+    &::placeholder {
+        color: $light;
+    }
+}
+
+.title {
+    color: $white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 8px;
+}
+.errorText {
+    color: $error;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 4px;
+}
+
+.errorInput {
+    border-color: $error;
+}
+
+// .darkContainer {
+//   .title {
+//     color: $white;
+//   }
+// }

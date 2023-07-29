@@ -1,0 +1,23 @@
+@import "src/styles/mixin.scss";
+
+.button {
+    @include button;
+    @include secondary;
+}
+.primary {
+    @include button;
+
+    @include primary;
+}
+.secondary {
+    @include button;
+
+    @include secondary;
+}
+.disabled {
+    color: $light;
+    background-color: $secondary;
+    &:hover {
+        cursor: not-allowed;
+    }
+}

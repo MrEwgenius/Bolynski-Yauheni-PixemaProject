@@ -1,4 +1,4 @@
-import  React from 'react';
+import React, { ReactElement } from 'react';
 
 export enum TabsTypes {
     Right = "right",
@@ -10,3 +10,4 @@ export type Tab = {
     title: string;
 };
 export type TabsListType = Tab[];
+

@@ -1,0 +1,10 @@
+@import "/src/styles/colors.scss";
+@import "/src/styles/mixin.scss";
+
+.title {
+  @include Title();
+  color: $white;
+}
+// .darkTitle {
+//   color: $white;
+// }

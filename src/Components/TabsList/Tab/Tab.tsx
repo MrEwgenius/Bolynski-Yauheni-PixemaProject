@@ -20,8 +20,8 @@ const Tab: FC<TabsProps> = ({ title, onClick, active }) => {
             onClick={onClick}
             className={classNames(styles.tab, {
                 [styles.active]: active,
-                [styles.Rating]: title === 'Rating',
-                [styles.Year]: title === 'Year'
+                // [styles.Rating]: title === 'Rating',
+                // [styles.Year]: title === 'Year'
 
             })}
         >

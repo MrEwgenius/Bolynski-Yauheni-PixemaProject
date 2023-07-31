@@ -5,7 +5,8 @@
     @include flexCentr;
     border-radius: 10px;
     height: 56px;
-    width: 438px;
+    // overflow: hidden;
+    width: 266px;
     background-color: $graphite;
-    display: flex;
+    // border-radius: 10px;
 }

@@ -7,7 +7,8 @@ export enum TabsTypes {
 
 export type Tab = {
     key: TabsTypes;
-    title: string;
+    title: string | ReactElement;
 };
 export type TabsListType = Tab[];
 
+export type Children = ReactElement | ReactElement[];

@@ -1,10 +1,15 @@
 @import "./colors.scss";
 
+@mixin Title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+}
 @mixin button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    // width: 200px;
     height: 56px;
     border-radius: 10px;
     font-size: 16px;

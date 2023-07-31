@@ -3,7 +3,8 @@
 
 .tab {
     @include flexCentr;
-    width: 217px;
+    // width: 49.2%;
+    width: 49%;
     height: 52px;
     color: $secondary;
     font-size: 16px;
@@ -11,15 +12,16 @@
     line-height: 24px;
     cursor: pointer;
     background-color: $dark;
-
     &:hover {
         color: $white;
     }
+   
 }
 
 .active {
     background-color: $graphite;
     color: $white;
+    border-top-left-radius: 10px;
 }
 
 .Rating {

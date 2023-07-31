@@ -1,0 +1,18 @@
+@import "/src/styles/colors.scss";
+@import "/src/styles/mixin.scss";
+
+.additionalInfo {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: $secondary;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    .signIn {
+        color: $primary;
+        margin-left: 4px;
+        cursor: pointer;
+    }
+}

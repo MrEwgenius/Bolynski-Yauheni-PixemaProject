@@ -1,12 +1,17 @@
 import *as React from 'react';
 import { useMemo, useState } from 'react';
 
-import Button, { ButtonTypes } from './Components/Button';
-import TabsList from './Components/TabsList';
+import Button, { ButtonTypes } from './components/Button';
+import TabsList from './components/TabsList';
 import { TabsTypes } from './@types';
-import Input from './Components/Input';
-import Username from './Components/Username';
+import Input from './components/Input';
+import Username from './components/Username';
 import { ArrowRightIcon, CheckIcon, CloseIcon, DeleteIcon, FavoritesIcon, FilterIcon, GroupIcon, MenuIcon, ShapeIcon, SharowIcon, UserIcon, ArrowIcon, TrendsIcon } from './assets/icons';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn/SignIn';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import ResetPasswordConfirmation from './pages/ResetPasswordConfirmation/ResetPasswordConfirmation';
+import Post from './components/Post/Post';
 
 const App = () => {
 
@@ -51,7 +56,7 @@ const App = () => {
       />
       <Input
         // disabled
-        errorText='Error'
+        // errorText='Error'
         title='Input'
         placeholder='Names'
         onChange={onChange}
@@ -72,6 +77,13 @@ const App = () => {
       <FavoritesIcon />
       <TrendsIcon />
       <ShapeIcon />
+      {/* <SignUp />
+      <SignIn />
+      <ResetPassword />
+      <ResetPasswordConfirmation /> */}
+      <Post name='Women'
+        year={2022}
+      />
 
 
     </div >

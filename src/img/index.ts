@@ -1,0 +1,1 @@
+export const imgDefault = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Isaac_Cigoli.jpg/266px-Isaac_Cigoli.jpg'

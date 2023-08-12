@@ -4,7 +4,7 @@ import React, { ChangeEvent, FC } from 'react';
 import styles from "./Input.module.scss";
 
 type InputProps = {
-    title: string,
+    title?: string,
     errorText?: string,
     placeholder: string,
     onChange: (value: string) => void,
@@ -29,9 +29,9 @@ const Input: FC<InputProps> = ({
 
 
     return (
-        <div className={classNames(styles.container, className)}>
-            <div className={styles.title}>{title}</div>
-            <input className={classNames(styles.input, {
+        <div className={classNames(styles.container)}>
+            {title && <div className={styles.title}>{title}</div>}
+            <input className={classNames(styles.input, className, {
                 [styles.disabled]: disabled,
                 [styles.errorInput]: errorText,
             })}

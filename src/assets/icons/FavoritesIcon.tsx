@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const FavoritesIcon = ({
-    width = '14',
+    width = '20',
     height = '24',
     fill = "#ffff",
 }) => {
@@ -9,7 +9,7 @@ export const FavoritesIcon = ({
         <svg
             width={width}
             height={height}
-            viewBox="0 0 14 22"
+            viewBox="0 -4 14 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >

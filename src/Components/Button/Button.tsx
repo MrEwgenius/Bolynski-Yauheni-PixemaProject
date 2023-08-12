@@ -17,7 +17,13 @@ type ButtonProps = {
 }
 
 
-const Button: FC<ButtonProps> = ({ type, title, onClick, className, disabled }) => {
+const Button: FC<ButtonProps> = ({
+    type,
+    title,
+    onClick,
+    className,
+    disabled
+}) => {
 
     const buttonStyle = styles[type]
 

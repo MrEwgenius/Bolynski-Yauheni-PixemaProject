@@ -1,0 +1,69 @@
+@import "/src/styles/colors.scss";
+
+.container {
+    background-color: #000000b0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+.closeIcon {
+    cursor: pointer;
+}
+.containerFilters {
+    border-radius: 20px;
+    // overflow: hidden;
+    width: 518px;
+    background-color: $dark;
+    height: 100%;
+    padding: 48px 40px;
+    .filtersTitlesWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 48px;
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 36px;
+            color: $white;
+        }
+    }
+}
+.tabList {
+    position: relative;
+    margin-bottom: 67px;
+    &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: $graphite;
+        bottom: -32px;
+    }
+}
+.multiSelect {
+    margin-top: 24px;
+}
+.selectCountry {
+    margin-top: 24px;
+}
+
+.inputContainerYaers {
+    display: flex;
+    gap: 40px;
+    // align-items: center;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    margin-top: 24px;
+}
+.containerButtons {
+    display: flex;
+    margin-top: 24px;
+    align-items: center;
+    gap: 40px;
+}

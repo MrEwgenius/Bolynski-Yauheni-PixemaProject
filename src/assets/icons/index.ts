@@ -12,3 +12,4 @@ export { ShapeIcon } from "./ShapeIcon";
 export { SharowIcon } from "./SharowIcon";
 export { UserIcon } from "./UserIcon";
 export { TrendsIcon } from "./TrendsIcon";
+export { LogoIcon } from "./LogoIcon";

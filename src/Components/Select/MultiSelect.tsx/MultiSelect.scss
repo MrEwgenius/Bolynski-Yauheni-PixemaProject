@@ -1,0 +1,101 @@
+@import "/src/styles/colors.scss";
+
+.customSelect {
+    // margin-top: 80px;
+    font-weight: 500;
+    width: 438px;
+    border: 2px solid transparent !important;
+    &:active {
+        border-radius: 10px !important;
+        border: 2px solid $primary !important;
+    }
+    &__control {
+        height: 56px !important;
+        padding: 0 0 0 20px !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        border: 2px solid transparent !important;
+        cursor: text !important;
+        background-color: $graphite !important;
+        box-shadow: none !important;
+        &--is-disabled {
+            background-color: $secondary !important;
+            color: $light !important;
+        }
+    }
+    &__input {
+        color: $white !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        line-height: 24px !important;
+    }
+    &__indicator-separator {
+        width: 0px !important;
+    }
+    &__indicator {
+        width: 0px !important;
+    }
+    position: relative;
+    &__menu {
+        position: absolute;
+        top: 0;
+        background-color: $dark !important;
+        border-radius: 10px !important;
+        // padding: 0 0 0 10px !important;
+        overflow: hidden !important;
+        margin-top: 10px !important;
+        // overflow: auto;
+        // overflow: scroll !important;
+        gap: 10px;
+        // height: 200px !important;
+        // overflow-x: hidden !important;
+        &:hover {
+        }
+        // background-color: #fff !important;
+        // padding: 10px 0;
+    }
+    &__menuList {
+        overflow-y: scroll !important;
+    }
+    &__option {
+        background-color: $graphite !important;
+        // background-color: #fff;
+        padding: 16px 20px !important;
+        cursor: pointer !important;
+        transition: 0.3s !important;
+        margin-bottom: 2px !important;
+        &:hover {
+            color: $primary !important;
+        }
+        &:last-child {
+            margin: 0px !important;
+        }
+    }
+    &__value-container {
+        gap: 10px;
+    }
+    &__multi-value {
+        gap: 5px;
+        background-color: $dark;
+        padding: 4px 8px;
+        border-radius: 6px;
+        &__label {
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            line-height: 24px !important;
+            cursor: pointer !important;
+        }
+
+        &__remove {
+            cursor: pointer !important;
+            transform: scale(1.4);
+        }
+    }
+}
+.title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: $white;
+    margin-bottom: 8px;
+}

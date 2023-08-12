@@ -1,0 +1,13 @@
+@import "/src/styles/colors.scss";
+
+.containerHeader {
+    display: flex;
+    gap: 186px;
+    justify-content: space-between;
+    align-items: center;
+    .containerWrapper {
+        display: flex;
+        flex: 1;
+        gap: 40px;
+    }
+}

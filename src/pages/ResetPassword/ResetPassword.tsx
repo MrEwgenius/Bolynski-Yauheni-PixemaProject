@@ -35,7 +35,7 @@ const ResetPassword = () => {
             btnTitle={isSent ? "Go to SignIn" : "Reset"}
             onSubmit={onSubmit}
         >
-            <div className={classNames(styles.container)}>
+            <div className={classNames(styles.containerResetPassword)}>
                 {isSent && `You will receive an email ${email} with a link to reset your password!`}
                 <Input
                     title={'Email'}

@@ -3,7 +3,6 @@ import classNames from "classnames";
 
 
 import styles from "./Tab.module.scss";
-import { TabsTypes } from "src/@types";
 
 
 type TabsProps = {
@@ -20,8 +19,6 @@ const Tab: FC<TabsProps> = ({ title, onClick, active }) => {
             onClick={onClick}
             className={classNames(styles.tab, {
                 [styles.active]: active,
-                // [styles.Rating]: title === 'Rating',
-                // [styles.Year]: title === 'Year'
 
             })}
         >

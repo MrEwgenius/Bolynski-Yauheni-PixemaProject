@@ -28,7 +28,6 @@ const Username: FC<UsernameProps> = ({ username, className }) => {
     }
     const handleMenuOpened = () => {
         setActive(!active)
-        console.log(1);
 
     }
 

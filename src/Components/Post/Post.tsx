@@ -1,48 +1,17 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState, useEffect } from 'react';
 import styles from './Post.module.scss'
 import TabsList from '../TabsList/TabsList';
 import { TabsTypes } from 'src/@types';
 import { FavoritesIcon, SharowIcon } from 'src/assets/icons';
-
-type PostProps = {
-    id?: number,
-    name?: string,
-    release_date?: string,
-    year?: number,
-    tagline?: string,
-    poster?: string,
-    backdrop?: string,
-    runtime?: number,
-    budget?: number,
-    revenue?: number,
-    popularity?: number,
-    tmdb_id?: number,
-    imdb_id?: string,
-    is_series?: false,
-    adult?: false,
-    season_count?: number,
-    episode_count?: number,
-    series_ended?: false,
-    language?: string,
-    original_title?: string,
-    certification?: string,
-    rating?: number,
-    vote_count?: number
-
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { PostSelectors, getSinglePost } from 'src/redux/redusers/postSlice';
+import { useParams } from 'react-router-dom';
+import { imgDefault } from 'src/img';
 
 
-const Post: FC<PostProps> = (
-    {
-        name,
-        year,
-        release_date,
-        poster,
-        runtime,
-        budget,
-        rating
-    }
-) => {
+
+
+const Post = () => {
     const [activeTab, setActiveTab] = useState(TabsTypes.Left);
     const onTabClick = (tab: TabsTypes) => () => {
         setActiveTab(tab);
@@ -55,10 +24,27 @@ const Post: FC<PostProps> = (
         ],
         []
     );
-    return (
+    const dispatch = useDispatch()
+
+    const { id } = useParams()
+
+
+    useEffect(() => {
+        if (id) {
+            dispatch(getSinglePost(id))
+        }
+    }, [id])
+
+    const singlePost = useSelector(PostSelectors.getSinglePost)
+
+    console.log(singlePost?.ratingsSummary.aggregateRating);
+    console.log(singlePost?.primaryImage.url);
+
+
+    return singlePost ? (
         <div className={styles.container}>
             <div className={styles.leftContainer}>
-                <img className={styles.poster} src="https://proprikol.ru/wp-content/uploads/2020/02/chudo-zhenshhina-kartinki-supergeroini-24.jpg" />
+                <img className={styles.poster} src={singlePost.primaryImage ? singlePost?.primaryImage.url : imgDefault} />
                 <div className={styles.savedBtns}>
                     <TabsList
                         className={styles.tabs}
@@ -69,9 +55,8 @@ const Post: FC<PostProps> = (
                 </div>
             </div>
             <div className={styles.rightContainer}>
-                <div>  Adventure Action Fantasy</div>
-                <div className={styles.title}>  Wonder Woman: 1984 </div>
-                <div className={styles.rating}>  7.6 </div>
+                <div className={styles.title}> {singlePost.titleText.text}</div>
+                <div className={styles.rating}> {singlePost?.ratingsSummary.aggregateRating} </div>
                 <div className={styles.descriprion}>
                     In 1984, after saving the world in Wonder Woman (2017), the immortal Amazon warrior, Princess Diana of Themyscira, finds herself trying to stay under the radar, working as an archaeologist at the Smithsonian Museum. With the memory of the brave U.S. pilot, Captain Steve Trevor, etched on her mind, Diana Prince becomes embroiled in a sinister conspiracy of global proportions when a transparent, golden-yellow citrine gemstone catches the eye of the power-hungry entrepreneur, Maxwell Lord.
                 </div>
@@ -88,7 +73,7 @@ const Post: FC<PostProps> = (
                         <div>Writers</div>
                     </div>
                     <div className={styles.characteristics}>
-                        <div >2011</div>
+                        <div >{singlePost.releaseYear.year}</div>
                         <div >15 Jul 2011</div>
                         <div >$381,409,310</div>
                         <div >United Kingdom, United States</div>
@@ -103,7 +88,7 @@ const Post: FC<PostProps> = (
 
 
         </div >
-    );
+    ) : null
 }
 
 export default Post;

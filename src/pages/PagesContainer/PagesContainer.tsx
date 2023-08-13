@@ -1,18 +1,17 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import styles from './PagesContainer.module.scss'
 import Header from '../Header/Header';
 import MenuTabsList from 'src/components/MenuTabs/MenuTabsList';
-import { MenuTypes } from 'src/@types';
+import { MenuTypes, SaveStatus } from 'src/@types';
 import { FavoritesIcon, GroupIcon, ShapeIcon, TrendsIcon } from 'src/assets/icons';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { RoutesList } from '../Router';
 import Button, { ButtonTypes } from 'src/components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostsList, updatePageNum, updateShowMoreButton } from 'src/redux/redusers/postSlice';
+import { getPostsList, getPostsListTrends, setActiveTabSlice, setSavedStatus, updatePageNum, updateShowMoreButton } from 'src/redux/redusers/postSlice';
 import { Rootstate } from 'src/redux/store';
 
-// export const PAGE_NUMBER = pageNum
 const PagesContainer = () => {
     const tabsList = useMemo(
         () => [
@@ -29,11 +28,19 @@ const PagesContainer = () => {
     const dispatch = useDispatch()
     const onClick = (tab: MenuTypes) => () => {
         setActiveTab(tab);
+
         if (tab === MenuTypes.Home) {
             onClickNavigate()
+            dispatch(setActiveTabSlice(tab))
+
+        } else if (tab === MenuTypes.Favoristes) {
+            dispatch(setActiveTabSlice(tab))
+
+        } else if (tab === MenuTypes.Trends) {
+            dispatch(setActiveTabSlice(tab))
+
         }
     };
-
 
     const onClickNavigate = () => {
 
@@ -46,6 +53,7 @@ const PagesContainer = () => {
         dispatch(updatePageNum(pageNum + 12))
         // dispatch(updateShowMoreButton(true))
         dispatch(getPostsList())
+        dispatch(getPostsListTrends())
 
     }
     return (

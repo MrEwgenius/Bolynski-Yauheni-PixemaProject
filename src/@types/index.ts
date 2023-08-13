@@ -66,6 +66,12 @@ export type MovieTypes = {
         },
         __typename: string
     },
+    genres: {
+        genres: [
+            text: string,
+            id: string,
+        ],
+    },
     ratingsSummary: {
         aggregateRating: number,
         voteCount: number,
@@ -118,3 +124,9 @@ export type MoviePostData = {
     results: MovieTypes,
 }
 
+export enum SaveStatus {
+
+    Saved = 'saved',
+    NotSaved = 'notSaved',
+
+}

@@ -37,8 +37,6 @@ const Post = () => {
 
     const singlePost = useSelector(PostSelectors.getSinglePost)
 
-    console.log(singlePost?.ratingsSummary.aggregateRating);
-    console.log(singlePost?.primaryImage.url);
 
 
     return singlePost ? (

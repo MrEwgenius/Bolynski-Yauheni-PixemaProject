@@ -72,6 +72,14 @@ export type MovieTypes = {
             id: string,
         ],
     },
+    plot: {
+        plotText: {
+            plainText: string,
+        }
+    },
+    runtime: {
+        seconds: number
+    },
     ratingsSummary: {
         aggregateRating: number,
         voteCount: number,

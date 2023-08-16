@@ -12,6 +12,11 @@ import { Rootstate } from "../store";
 
 
 function* getPostsWorkers() {
+
+    const startYear: number | undefined = yield select((state: Rootstate) => state.postReduser.startYear);
+    const endYear: number | undefined = yield select((state: Rootstate) => state.postReduser.endYear);
+
+
     yield put(updateShowMoreButton(true)) //показываем кнопку MORE при получении постов
 
 
@@ -20,7 +25,9 @@ function* getPostsWorkers() {
 
     const response: ApiResponse<PostsData | null> = yield call(
         API.getPosts,
-        pageNum
+        pageNum,
+        startYear,
+        endYear,
     )
     if (response.data) {
         if (response.data) {
@@ -34,16 +41,21 @@ function* getPostsWorkers() {
     }
 
 }
+
 function* getPostsWorkersTrends() {
     yield put(updateShowMoreButton(true)) //показываем кнопку MORE при получении постов
 
-
-    const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNum);
+    const startYear: number | undefined = yield select((state: Rootstate) => state.postReduser.startYear);
+    const endYear: number | undefined = yield select((state: Rootstate) => state.postReduser.endYear);
+    const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNumTrend);
 
 
     const response: ApiResponse<PostsData | null> = yield call(
         API.getPostsTrend,
-        pageNum
+        pageNum,
+        startYear,
+        endYear,
+
     )
     if (response.data) {
         if (response.data) {

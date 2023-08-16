@@ -7,26 +7,33 @@ import { GetPostsPayload } from '../@types';
 
 type initialState = {
     selectedPost: MovieListTypes,
+    selectedPostFilterYear: MovieListTypes,
     selectedPostTrends: MovieListTypes,
     singlePost: MovieTypes | null,
     pageNum: number;
+    pageNumTrend: number;
     showMoreButton: boolean;
     myPosts: MovieListTypes,
     savedPosts: MovieListTypes,
     activeTab: MenuTypes.Home | MenuTypes.Favoristes | MenuTypes.Trends,
+    startYear?: number,
+    endYear?: number,
 
 }
 
 const initialState: initialState = {
     selectedPost: [],
+    selectedPostFilterYear: [],
     selectedPostTrends: [],
     singlePost: null,
     pageNum: 12,
+    pageNumTrend: 12,
     showMoreButton: true,
     myPosts: [],
     savedPosts: [],
     activeTab: MenuTypes.Home,
-
+    startYear: undefined,
+    endYear: undefined,
 
 };
 const postSlice = createSlice({
@@ -35,10 +42,16 @@ const postSlice = createSlice({
     name: 'postReduser',
     initialState,
     reducers: {
+
         getPostsList: (_, __: PayloadAction<undefined>) => { },
         setPostsList: (state, action: PayloadAction<MovieListTypes>) => {
             state.selectedPost = action.payload
         },
+        getPostsFilterList: (_, __: PayloadAction<undefined>) => { },
+        setPostsFilterList: (state, action: PayloadAction<MovieListTypes>) => {
+            state.selectedPostFilterYear = action.payload
+        },
+
         getPostsListTrends: (_, __: PayloadAction<undefined>) => { },
         setPostsListTrends: (state, action: PayloadAction<MovieListTypes>) => {
             state.selectedPostTrends = action.payload
@@ -48,18 +61,18 @@ const postSlice = createSlice({
         setSinglePost: (state, action: PayloadAction<MovieTypes>) => {
             state.singlePost = action.payload;
         },
+
         updatePageNum: (state, action: PayloadAction<number>) => {
             state.pageNum = action.payload;
         },
+        updatePageNumTrend: (state, action: PayloadAction<number>) => {
+            state.pageNumTrend = action.payload;
+        },
+
         updateShowMoreButton: (state, action: PayloadAction<boolean>) => {
             state.showMoreButton = action.payload;
         },
-        // getMyPosts: (_, __: PayloadAction<undefined>) => { },
-        // setMyPosts: (state, action: PayloadAction<MovieListTypes>) => {
-        //     state.myPosts = action.payload
-        //     console.log(state.myPosts = action.payload);
 
-        // },
         setSavedStatus: (state, action: PayloadAction<{ card: MovieTypes, status: SaveStatus }>) => {
             const { card, status } = action.payload;
             const savedIndex = state.savedPosts.findIndex(item => item.id === card.id)
@@ -67,7 +80,7 @@ const postSlice = createSlice({
             const mainIndex = isSaved ? savedIndex : 1
             mainIndex === -1 ?
                 state.savedPosts.push(card)
-                
+
                 :
                 state.savedPosts.splice(mainIndex, 1)
 
@@ -76,6 +89,12 @@ const postSlice = createSlice({
         setActiveTabSlice(state, action) {
             state.activeTab = action.payload;
         },
+
+        setFilterYears: (state, action: PayloadAction<{ startYear?: number, endYear?: number }>) => {
+            state.startYear = action.payload.startYear;
+            state.endYear = action.payload.endYear;
+        },
+
         // getPostsListPagination: (_, __: PayloadAction<GetPostsPayload>) => { },
         // setPostsListPagination: (state, action: PayloadAction<SetPostsListPayload>) => {
         //     const { total, isOverwrite, postsList } = action.payload
@@ -104,26 +123,26 @@ export const {
     getSinglePost,
     setSinglePost,
     updatePageNum,
+    updatePageNumTrend,
     updateShowMoreButton,
-    // getMyPosts,
-    // setMyPosts,
     setSavedStatus,
     setActiveTabSlice,
-    // getPostsListPagination,
-    // setPostsListPagination,
-    // setPostListLoading,
-    // getSelectedPost,
+    getPostsFilterList,
+    setPostsFilterList,
+    setFilterYears
 
 } = postSlice.actions
 
 export const PostSelectors = {
 
     getPostsList: (state: Rootstate) => state.postReduser.selectedPost,
+    getPostsFilterList: (state: Rootstate) => state.postReduser.selectedPostFilterYear,
     getPostsListTrends: (state: Rootstate) => state.postReduser.selectedPostTrends,
     getSinglePost: (state: Rootstate) => state.postReduser.singlePost,
-    // getMyPosts: (state: Rootstate) => state.postReduser.myPosts,
     getSavedPosts: (state: Rootstate) => state.postReduser.savedPosts,
     getActiveTab: (state: Rootstate) => state.postReduser.activeTab,
+    // getFilterYearsStart: (state: Rootstate) => state.postReduser.startYear,
+    // getFilterYearsEnd: (state: Rootstate) => state.postReduser.endYear,
 
 }
 

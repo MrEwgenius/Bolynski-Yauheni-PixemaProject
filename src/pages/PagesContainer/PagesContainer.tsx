@@ -26,6 +26,17 @@ const PagesContainer = () => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
+    const onClickPageNum = () => {
+        dispatch(updatePageNum(pageNum + 12))
+        // при тыке на favorits убрать кнопку More ↓↓↓
+        // dispatch(updateShowMoreButton(false))
+        dispatch(getPostsList())
+        dispatch(getPostsListTrends())
+
+
+    }
+
+    
     const onClick = (tab: MenuTypes) => () => {
         setActiveTab(tab);
 
@@ -35,9 +46,13 @@ const PagesContainer = () => {
 
         } else if (tab === MenuTypes.Favoristes) {
             dispatch(setActiveTabSlice(tab))
+            // при тыке на favorits убрать кнопку More ↓↓↓
+            dispatch(updateShowMoreButton(false))
+
 
         } else if (tab === MenuTypes.Trends) {
             dispatch(setActiveTabSlice(tab))
+            return onClickPageNum
 
         }
     };
@@ -49,13 +64,6 @@ const PagesContainer = () => {
     const showMoreButton = useSelector((state: Rootstate) => state.postReduser.showMoreButton);
 
     const pageNum = useSelector((state: Rootstate) => state.postReduser.pageNum);
-    const onClickPageNum = () => {
-        dispatch(updatePageNum(pageNum + 12))
-        // dispatch(updateShowMoreButton(true))
-        dispatch(getPostsList())
-        dispatch(getPostsListTrends())
-
-    }
     return (
         <div className={styles.containerHome}>
             <Header />

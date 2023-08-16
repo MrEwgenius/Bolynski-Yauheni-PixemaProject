@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PostSelectors, getSinglePost } from 'src/redux/redusers/postSlice';
 import { useParams } from 'react-router-dom';
 import { useCardActions } from 'src/hooks';
-import emptyList from 'src/img/emptyList.png'
+import emptyListe from 'src/img/emptyList.png'
 
 
 
@@ -20,9 +20,8 @@ const CardList: FC<CardListProps> = ({ cardList }) => {
     const updates = null || []
 
     const { onSavedStatus, } = useCardActions()
-    console.log(cardList);
 
-    return !updates?.length ? (
+    return cardList.length ? (
 
         <div className={styles.containerCardList}>
 
@@ -39,10 +38,11 @@ const CardList: FC<CardListProps> = ({ cardList }) => {
 
 
         </div>
-    ) : <div>
-        <img src={emptyList} alt="EmptyList" />
-        <div>Empty state text</div>
-    </div>
+    ) :
+        <div>
+            <img src={emptyListe} alt="EmptyList" />
+            <div>Empty state text</div>
+        </div>
 }
 
 export default CardList;

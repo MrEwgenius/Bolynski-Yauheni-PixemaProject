@@ -19,8 +19,6 @@ const Home = () => {
 
     const lokStorSet = localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedPosts))
     let lokStorGet = localStorage.getItem(LOCAL_STORAGE_KEY);
-    console.log(lokStorSet);
-    console.log(lokStorGet);
 
     useEffect(() => {
 

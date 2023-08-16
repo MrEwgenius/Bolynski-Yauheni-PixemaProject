@@ -8,6 +8,8 @@ import { CloseIcon } from 'src/assets/icons';
 import TabsList from 'src/components/TabsList/TabsList';
 import { OnChangeValue } from 'react-select';
 import Button, { ButtonTypes } from 'src/components/Button/Button';
+import { useDispatch } from 'react-redux';
+import { getPostsList, getPostsListTrends, setFilterYears } from 'src/redux/redusers/postSlice';
 
 type SelectedFilterModalProps = {
 
@@ -16,6 +18,7 @@ type SelectedFilterModalProps = {
 
 const SelectedFilterModal: FC<SelectedFilterModalProps> = ({ onClick }) => {
 
+    const dispatch = useDispatch()
     //multiSelect
     const options: IOption[] = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -99,6 +102,16 @@ const SelectedFilterModal: FC<SelectedFilterModalProps> = ({ onClick }) => {
     }
     //input
 
+    const applyFilters = (startYear: number | undefined, endYear: number | undefined) => {
+        dispatch(setFilterYears({ startYear, endYear }));
+        dispatch(getPostsListTrends())
+        dispatch(getPostsList()); // Обновляем список постов с учетом фильтрации
+        // () => {
+        //     onClick
+        // }
+    };
+
+
     return (
         <div>
             {<div className={styles.container}>
@@ -179,7 +192,7 @@ const SelectedFilterModal: FC<SelectedFilterModalProps> = ({ onClick }) => {
                             type={ButtonTypes.Secondary}
                         />
                         <Button
-                            onClick={() => { }}
+                            onClick={() => applyFilters(+inputValueYearFrom , +inputValueYearTo )}
                             title={'Show results'}
                             type={ButtonTypes.Primary}
                         />

@@ -2,21 +2,23 @@
 @import "/src/styles/mixin.scss";
 
 .containerCard {
-    // background-color: #fff;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: start;
     width: 266px;
-    // justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     .imageContainer {
-        width: 266px;
+        height: 357px;
         margin-bottom: 24px;
         position: relative;
         border-radius: 20px;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         img {
+            flex: 1;
             object-fit: contain;
-            width: 100%;
         }
         .poster {
         }
@@ -53,6 +55,7 @@
         font-weight: 700;
         line-height: 24px;
         cursor: pointer;
+        word-wrap: break-word;
         // display: inline-flex;
         &:hover {
             color: $primary;
@@ -61,7 +64,7 @@
     .genere {
         display: inline-flex;
 
-        cursor: pointer;
+        // cursor: pointer;
         color: $light;
         font-size: 16px;
         font-weight: 500;

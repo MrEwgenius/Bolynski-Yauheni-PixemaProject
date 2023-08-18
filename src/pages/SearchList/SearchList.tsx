@@ -24,7 +24,6 @@ const SearchList = () => {
             navigate(RoutesList.Home)
         } else {
             dispatch(getSearchedPosts({ title, isOverwrite: false }))
-            console.log(title);
             
             
         }

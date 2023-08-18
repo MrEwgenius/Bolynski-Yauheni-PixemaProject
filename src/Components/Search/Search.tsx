@@ -1,4 +1,4 @@
-import React, { FC, KeyboardEvent, useState, useEffect } from 'react';
+import React, { FC, ChangeEvent, KeyboardEvent, useState, useEffect } from 'react';
 import styles from './Search.module.scss'
 import Input from '../Input/Input';
 import { FilterIcon } from 'src/assets/icons';
@@ -8,61 +8,82 @@ import { PostSelectors, clearSearchedPosts, getSearchedPosts } from 'src/redux/r
 import { useDispatch, useSelector } from 'react-redux';
 
 type SearchProps = {
-    disabled?: boolean;
-    onclick?: () => void
+    title?: string,
+    errorText?: string,
+    placeholder: string,
+    onChange: (value: string) => void,
+    disabled?: boolean,
+    value: string,
+    className?: string,
+    onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void,
+    onClick?: () => void
 };
 
 
-const Search: FC<SearchProps> = ({ disabled, onclick }) => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [isSearch, setSearch] = useState(false)
-    const [isOpened, setOpened] = useState(false)
-    const [isDropdownOpened, setDropdownOpened] = useState(false)
-    const [inpValue, setInpValue] = useState('')
-    
-    const handleSearchOpened = () => {
-        setSearch(!isSearch)
-        setDropdownOpened(true)
-        if (isSearch && inpValue) {
-            dispatch(clearSearchedPosts())
-            navigate(`/titles/search/title/${inpValue}`)
-            setInpValue('')
+const Search: FC<SearchProps> = ({
+    onClick,
+    title,
+    errorText,
+    placeholder,
+    onChange,
+    disabled,
+    value,
+    className,
+    onKeyDown
+}) => {
+    // const navigate = useNavigate()
+    // const dispatch = useDispatch()
+    // const [isSearch, setSearch] = useState(false)
+    // const [isOpened, setOpened] = useState(false)
+    // const [isDropdownOpened, setDropdownOpened] = useState(false)
+    // const [inpValue, setInpValue] = useState('')
 
-        }
+    // const handleSearchOpened = () => {
+    //     setSearch(!isSearch)
+    //     setDropdownOpened(true)
+    //     if (isSearch && inpValue) {
+    //         dispatch(clearSearchedPosts())
+    //         navigate(`/titles/search/title/${inpValue}`)
+    //         setInpValue('')
+
+    //     }
+    // }
+    // const onKeyDown = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    //     if (event.key === 'Enter') {
+    //         handleSearchOpened()
+
+    //     }
+    // }
+
+
+    // useEffect(() => {
+    //     if (inpValue.length) {
+
+    //         dispatch(getSearchedPosts({ title: inpValue, isOverwrite: true }))
+
+
+    //     } else {
+    //         dispatch(clearSearchedPosts())
+
+    //     }
+
+    // }, [inpValue])
+
+    const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        onChange(event.target.value)
     }
-    const onKeyDown = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        if (event.key === 'Enter') {
-            handleSearchOpened()
-
-        }
-    }
-
-
-    useEffect(() => {
-        if (inpValue.length) {
-
-            dispatch(getSearchedPosts({ title: inpValue, isOverwrite: true }))
-
-
-        } else {
-            dispatch(clearSearchedPosts())
-
-        }
-
-    }, [inpValue])
     return (
         <div className={styles.container}>
             <Input
                 placeholder='Search...'
-                onChange={setInpValue}
-                value={inpValue}
+                onChange={onChange}
+                value={value}
                 disabled={disabled}
                 className={styles.input}
                 onKeyDown={onKeyDown}
             />
             <div
-                onClick={onclick}
+                onClick={onClick}
                 className={styles.filterIcon}
             >
                 <FilterIcon fill={disabled ? '#AFB2B6' : 'white'} />

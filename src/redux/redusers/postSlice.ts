@@ -7,6 +7,7 @@ import { GetPostsPayload } from '../@types';
 
 type initialState = {
     selectedPost: MovieListTypes,
+    selectedRandomPost: MovieListTypes,
     selectedPostFilterYear: MovieListTypes,
     selectedPostTrends: MovieListTypes,
     singlePost: MovieTypes | null,
@@ -25,6 +26,7 @@ type initialState = {
 
 const initialState: initialState = {
     selectedPost: [],
+    selectedRandomPost: [],
     selectedPostFilterYear: [],
     selectedPostTrends: [],
     singlePost: null,
@@ -103,13 +105,19 @@ const postSlice = createSlice({
         },
         getSearchedPosts: (_, __: PayloadAction<GetSearchedPostsPayload>) => { },
         setSearchedPosts: (state, action: PayloadAction<SetSearchedPostsPayload>) => {
-            const {  movieList, isOverwrite } = action.payload
+            const { movieList, isOverwrite } = action.payload
             if (isOverwrite) {
                 state.searchedPosts = movieList
             } else {
                 state.searchedPosts.push(...movieList)
             }
         },
+        getRandomPostsList: (_, __: PayloadAction<undefined>) => { },
+        setRandomPostsList: (state, action: PayloadAction<MovieListTypes>) => {
+            state.selectedRandomPost = action.payload
+        },
+
+
 
         // getPostsListPagination: (_, __: PayloadAction<GetPostsPayload>) => { },
         // setPostsListPagination: (state, action: PayloadAction<SetPostsListPayload>) => {
@@ -149,6 +157,8 @@ export const {
     clearSearchedPosts,
     getSearchedPosts,
     setSearchedPosts,
+    getRandomPostsList,
+    setRandomPostsList,
 
 } = postSlice.actions
 
@@ -161,6 +171,8 @@ export const PostSelectors = {
     getSavedPosts: (state: Rootstate) => state.postReduser.savedPosts,
     getActiveTab: (state: Rootstate) => state.postReduser.activeTab,
     getSearchedPosts: (state: Rootstate) => state.postReduser.searchedPosts,
+    getRandomPostsList: (state: Rootstate) => state.postReduser.selectedRandomPost,
+
     // getFilterYearsStart: (state: Rootstate) => state.postReduser.startYear,
     // getFilterYearsEnd: (state: Rootstate) => state.postReduser.endYear,
 

@@ -30,6 +30,10 @@ const getSearchPosts = (title: string) => {
     return API.get(`/titles/search/title/${title}`, { exact: false, list: 'top_boxoffice_200', })
 
 }
+const getRandomPosts = () => {
+    return API.get(`/titles/random`, {list: 'most_pop_movies', limit:3 })
+
+}
 
 
 
@@ -40,4 +44,5 @@ export default {
     getSinglePost,
     getSearchPosts,
     getPostsTrend,
+    getRandomPosts
 }

@@ -68,8 +68,10 @@ export type MovieTypes = {
     },
     genres: {
         genres: [
-            text: string,
-            id: string,
+            {
+                text: string,
+                id: string,
+            }
         ],
     },
     plot: {

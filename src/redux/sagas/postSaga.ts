@@ -5,7 +5,7 @@ import { ApiResponse } from 'apisauce'
 
 import API from "src/utils/api";
 import { GetSearchedPostsPayload, MovieListTypes, MoviePostData, MovieTypes, PostsData } from "src/@types";
-import { getPostsList, getPostsListTrends, getSearchedPosts, getSinglePost, setPostsList, setPostsListTrends, setSearchedPosts, setSinglePost, updateShowMoreButton } from "../redusers/postSlice";
+import { getPostsList, getPostsListTrends, getRandomPostsList, getSearchedPosts, getSinglePost, setPostsList, setPostsListTrends, setRandomPostsList, setSearchedPosts, setSinglePost, updateShowMoreButton } from "../redusers/postSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GetPostsPayload, GetPostsResponsData } from "../@types";
 import { Rootstate } from "../store";
@@ -85,7 +85,7 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
 function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
 
     yield delay(500)
-    const {  title, isOverwrite } = action.payload
+    const { title, isOverwrite } = action.payload
 
     const response: ApiResponse<GetPostsResponsData> = yield call(
         API.getSearchPosts,
@@ -103,6 +103,30 @@ function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>)
     } else {
         console.log('Searched Posts Error');
     }
+}
+
+function* getRandomPostsWorkers() {
+
+
+
+
+
+    const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNum);
+
+    const response: ApiResponse<PostsData | null> = yield call(
+        API.getRandomPosts,
+    )
+    if (response.data) {
+        if (response.data) {
+            yield put(setRandomPostsList(response.data.results))
+
+
+        } else {
+            console.error('Get Random Posts List Error', response.problem);
+        }
+
+    }
+
 }
 
 // function* getMyPostsWorker() {
@@ -143,6 +167,7 @@ export default function* postSagaWatcher() {
         takeLatest(getSinglePost, getSinglePostWorker),
         takeLatest(getPostsListTrends, getPostsWorkersTrends),
         takeLatest(getSearchedPosts, getSearchedPostsWorker),
+        takeLatest(getRandomPostsList, getRandomPostsWorkers),
         // takeLatest(getMyPosts, getMyPostsWorker),
     ])
 }

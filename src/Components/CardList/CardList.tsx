@@ -39,9 +39,6 @@ const CardList: FC<CardListProps> = ({ cardList }) => {
 
     }
 
-    console.log(cardList.length);
-    console.log(pageNum);
-
     return (
         cardList.length ? (
             <div>

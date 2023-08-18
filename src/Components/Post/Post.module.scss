@@ -1,6 +1,6 @@
 @import "/src/styles/colors.scss";
 
-.container {
+.containerMainPost {
     width: 1186px;
     margin: 0 auto 40px;
     display: flex;
@@ -25,6 +25,12 @@
         display: flex;
         flex-direction: column;
         align-items: start;
+        .genres {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            color: $light;
+        }
         .title {
             color: $white;
             font-size: 40px;
@@ -90,3 +96,20 @@
     border-radius: 5px;
 }
 
+.RandomMovies {
+    // background-color: #fff;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    // width: 900px;
+}
+.card {
+    // width: 300px;
+}
+.title {
+    margin-bottom: 40px;
+}
+
+.containerRandomMovies {
+    
+}

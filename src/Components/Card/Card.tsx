@@ -6,17 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PostSelectors, getSinglePost, updateShowMoreButton } from 'src/redux/redusers/postSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MenuTypes, MovieTypes, SaveStatus } from 'src/@types';
+import classNames from 'classnames';
 
 
 
 
 interface CardProps extends MovieTypes {
     onSavedClick: (status: SaveStatus) => void,
+    className?: string
 
 }
 
 
-const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleText, primaryImage }) => {
+const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleText, primaryImage, className }) => {
 
     const dispatch = useDispatch()
     const savedPosts = useSelector(PostSelectors.getSavedPosts)
@@ -30,16 +32,17 @@ const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleTe
 
     }
 
-    // const genre = genres.genres.map((el) => {
 
-    //     // console.log(el);
-    //     // жанры доделать 
-    // })
-    
+    // const genre = genres.genres.map((el) => { el.text })
+
+    const genreText = genres?.genres?.map(genre => genre.text).join(' • ');
+
+
+
 
     return (
         <div
-            className={styles.containerCard}
+            className={classNames(styles.containerCard , className)}
         >
             <div className={styles.imageContainer}>
                 <img className={styles.poster} src={primaryImage?.url ? primaryImage?.url : imgDefault} alt="img" />
@@ -52,7 +55,7 @@ const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleTe
                 </div>
             </div>
             <div onClick={onTitleClick} className={styles.name}>{titleText.text}</div>
-            <div className={styles.genere}>{'жанры тут должны быть '}</div>
+            <div className={styles.genere}>{genreText}</div>
 
         </div >
     );

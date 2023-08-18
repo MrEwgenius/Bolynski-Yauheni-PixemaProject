@@ -2,7 +2,6 @@
 
 .input {
     padding: 14px 20px;
-    // height: 56px;
     background-color: $graphite;
     border: 2px solid transparent;
     outline: 0;
@@ -13,7 +12,6 @@
     border-radius: 10px;
     resize: none;
     width: 100%;
-    margin-top: 8px;
 
     &:focus {
         border-color: $primary;
@@ -24,6 +22,9 @@
     &::placeholder {
         color: $secondary;
     }
+}
+.container{
+
 }
 
 .disabled {

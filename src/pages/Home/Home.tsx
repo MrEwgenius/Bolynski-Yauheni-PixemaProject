@@ -6,16 +6,20 @@ import styles from './Home.module.scss'
 import { MenuTypes } from 'src/@types';
 import { LOCAL_STORAGE_KEY } from 'src/utils/constants';
 import { json } from 'stream/consumers';
+import { RoutesList } from '../Router';
+import { Route, useLocation } from 'react-router-dom';
 
 
 const Home = () => {
 
     const dispatch = useDispatch()
+    const location = useLocation();
+    const activeTab = location.pathname
 
     const allPosts = useSelector(PostSelectors.getPostsList)
     const trendsPosts = useSelector(PostSelectors.getPostsListTrends)
     const savedPosts = useSelector(PostSelectors.getSavedPosts)
-    const activeTab = useSelector(PostSelectors.getActiveTab);
+    // const activeTab = useSelector(PostSelectors.getActiveTab);
 
     const lokStorSet = localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedPosts))
     let lokStorGet = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -27,21 +31,31 @@ const Home = () => {
 
     }, [])
 
-
-
-
+    // const cardLister = () => {
+    //     switch (activeTab) {
+    //         case MenuTypes.Favoristes:
+    //             return savedPosts;
+    //         case MenuTypes.Home:
+    //             return allPosts;
+    //         case MenuTypes.Trends:
+    //             return trendsPosts;
+    //         default:
+    //             return [];
+    //     }
+    // }
     const cardLister = () => {
         switch (activeTab) {
-            case MenuTypes.Favoristes:
+            case RoutesList.Favorites:
                 return savedPosts;
-            case MenuTypes.Home:
+            case RoutesList.Home:
                 return allPosts;
-            case MenuTypes.Trends:
+            case RoutesList.Trend:
                 return trendsPosts;
             default:
                 return [];
         }
     }
+    // console.log(trendsPosts);
 
 
     return (

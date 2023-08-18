@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { MenuTypes, MovieListTypes, MovieTypes, SaveStatus } from 'src/@types';
+import { GetSearchedPostsPayload, MenuTypes, MovieListTypes, MovieTypes, SaveStatus, SetSearchedPostsPayload } from 'src/@types';
 import { Rootstate } from '../store';
 import { GetPostsPayload } from '../@types';
 
@@ -18,6 +18,8 @@ type initialState = {
     activeTab: MenuTypes.Home | MenuTypes.Favoristes | MenuTypes.Trends,
     startYear?: number,
     endYear?: number,
+    searchedPosts: MovieListTypes,
+    totalSearchedCount: number,
 
 }
 
@@ -34,6 +36,8 @@ const initialState: initialState = {
     activeTab: MenuTypes.Home,
     startYear: undefined,
     endYear: undefined,
+    searchedPosts: [],
+    totalSearchedCount: 0,
 
 };
 const postSlice = createSlice({
@@ -94,6 +98,18 @@ const postSlice = createSlice({
             state.startYear = action.payload.startYear;
             state.endYear = action.payload.endYear;
         },
+        clearSearchedPosts: (state) => {
+            state.searchedPosts = []
+        },
+        getSearchedPosts: (_, __: PayloadAction<GetSearchedPostsPayload>) => { },
+        setSearchedPosts: (state, action: PayloadAction<SetSearchedPostsPayload>) => {
+            const {  movieList, isOverwrite } = action.payload
+            if (isOverwrite) {
+                state.searchedPosts = movieList
+            } else {
+                state.searchedPosts.push(...movieList)
+            }
+        },
 
         // getPostsListPagination: (_, __: PayloadAction<GetPostsPayload>) => { },
         // setPostsListPagination: (state, action: PayloadAction<SetPostsListPayload>) => {
@@ -129,7 +145,10 @@ export const {
     setActiveTabSlice,
     getPostsFilterList,
     setPostsFilterList,
-    setFilterYears
+    setFilterYears,
+    clearSearchedPosts,
+    getSearchedPosts,
+    setSearchedPosts,
 
 } = postSlice.actions
 
@@ -141,6 +160,7 @@ export const PostSelectors = {
     getSinglePost: (state: Rootstate) => state.postReduser.singlePost,
     getSavedPosts: (state: Rootstate) => state.postReduser.savedPosts,
     getActiveTab: (state: Rootstate) => state.postReduser.activeTab,
+    getSearchedPosts: (state: Rootstate) => state.postReduser.searchedPosts,
     // getFilterYearsStart: (state: Rootstate) => state.postReduser.startYear,
     // getFilterYearsEnd: (state: Rootstate) => state.postReduser.endYear,
 

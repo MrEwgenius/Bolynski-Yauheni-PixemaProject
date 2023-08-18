@@ -5,79 +5,116 @@ import Header from '../Header/Header';
 import MenuTabsList from 'src/components/MenuTabs/MenuTabsList';
 import { MenuTypes, SaveStatus } from 'src/@types';
 import { FavoritesIcon, GroupIcon, ShapeIcon, TrendsIcon } from 'src/assets/icons';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { RoutesList } from '../Router';
 import Button, { ButtonTypes } from 'src/components/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostsList, getPostsListTrends, setActiveTabSlice, setSavedStatus, updatePageNum, updateShowMoreButton } from 'src/redux/redusers/postSlice';
+import { getPostsList, getPostsListTrends, setActiveTabSlice, setSavedStatus, updatePageNum, updatePageNumTrend, updateShowMoreButton } from 'src/redux/redusers/postSlice';
 import { Rootstate } from 'src/redux/store';
+import classNames from 'classnames';
 
 const PagesContainer = () => {
-    const tabsList = useMemo(
-        () => [
-            { key: MenuTypes.Home, title: "Home", icon: <ShapeIcon /> },
-            { key: MenuTypes.Trends, title: "Trends", icon: <TrendsIcon /> },
-            { key: MenuTypes.Favoristes, title: "Favoristes", icon: <FavoritesIcon /> },
-            { key: MenuTypes.Settings, title: "Settings", icon: <GroupIcon /> },
-        ],
+    // const tabsList = useMemo(
+    //     () => [
+    //         { key: MenuTypes.Home, title: "Home", icon: <ShapeIcon /> },
+    //         { key: MenuTypes.Trends, title: "Trends", icon: <TrendsIcon /> },
+    //         { key: MenuTypes.Favoristes, title: "Favoristes", icon: <FavoritesIcon /> },
+    //         { key: MenuTypes.Settings, title: "Settings", icon: <GroupIcon /> },
+    //     ],
+    //     []
+    // );
+
+    const navLinks = useMemo(() => [
+        { path: RoutesList.Home, key: MenuTypes.Home, title: "Home", icon: <ShapeIcon /> },
+        { path: RoutesList.Trend, key: MenuTypes.Trends, title: "Trends", icon: <TrendsIcon /> },
+        { path: RoutesList.Favorites, key: MenuTypes.Favoristes, title: "Favoristes", icon: <FavoritesIcon /> },
+        { path: RoutesList.Setings, key: MenuTypes.Settings, title: "Settings", icon: <GroupIcon /> },
+    ],
         []
     );
-    const [activeTab, setActiveTab] = useState(MenuTypes.Home);
-    const navigate = useNavigate()
+
+
+
+    // const [activeTab, setActiveTab] = useState(MenuTypes.Home);
+    // const navigate = useNavigate()
+    const location = useLocation();
 
     const dispatch = useDispatch()
     const onClickPageNum = () => {
+
         dispatch(updatePageNum(pageNum + 12))
+        dispatch(getPostsList())
+
+
+        dispatch(updatePageNumTrend(pageNum + 12))
         // при тыке на favorits убрать кнопку More ↓↓↓
         // dispatch(updateShowMoreButton(false))
-        dispatch(getPostsList())
         dispatch(getPostsListTrends())
 
 
+
+
     }
 
-    
-    const onClick = (tab: MenuTypes) => () => {
-        setActiveTab(tab);
+    // const onClick = (tab: MenuTypes) => () => {
+    //     setActiveTab(tab);
 
-        if (tab === MenuTypes.Home) {
-            onClickNavigate()
-            dispatch(setActiveTabSlice(tab))
+    //     if (tab === MenuTypes.Home) {
 
-        } else if (tab === MenuTypes.Favoristes) {
-            dispatch(setActiveTabSlice(tab))
-            // при тыке на favorits убрать кнопку More ↓↓↓
-            dispatch(updateShowMoreButton(false))
+    //         onClickNavigate()
+    //         dispatch(setActiveTabSlice(tab))
+
+    //     } else if (tab === MenuTypes.Favoristes) {
+    //         // при тыке на favorits убрать кнопку More ↓↓↓
+    //         dispatch(updateShowMoreButton(false))
+    //         dispatch(setActiveTabSlice(tab))
 
 
-        } else if (tab === MenuTypes.Trends) {
-            dispatch(setActiveTabSlice(tab))
-            return onClickPageNum
+    //     } else if (tab === MenuTypes.Trends) {
+    //         dispatch(setActiveTabSlice(tab))
 
-        }
-    };
+    //     }
+    // };
 
-    const onClickNavigate = () => {
+    // const onClickNavigate = () => {
 
-        navigate(RoutesList.Home)
-    }
+    //     navigate(RoutesList.Home)
+    // }
     const showMoreButton = useSelector((state: Rootstate) => state.postReduser.showMoreButton);
+
+    if (
+        location.pathname === RoutesList.Favorites
+        || location.pathname === RoutesList.Setings
+    ) {
+        dispatch(updateShowMoreButton(false))
+
+    } else {
+        dispatch(updateShowMoreButton(true))
+    }
+
 
     const pageNum = useSelector((state: Rootstate) => state.postReduser.pageNum);
     return (
         <div className={styles.containerHome}>
             <Header />
             <div className={styles.containerWrapper}>
-                <MenuTabsList
-
-                    activeTab={activeTab}
-                    onTabClick={onClick}
-                    tabsList={tabsList}
-                />
+                <div className={styles.linkWrapper}>
+                    {navLinks.map(link =>
+                        <NavLink
+                            to={link.path}
+                            key={link.key}
+                            className={classNames(styles.navLinkButton, {
+                                [styles.activeNavButton]: location.pathname === link.path,
+                            })}
+                        >
+                            <div className={styles.linkTabs}>{link.icon} {link.title}</div>
+                        </NavLink>
+                    )}
+                </div>
                 <div className={styles.scrollContainer}>
                     <div className={styles.outlet}>
                         <Outlet />
-                        {showMoreButton && (<div><Button className={styles.buttonPageNum} onClick={onClickPageNum} title={'More'} type={ButtonTypes.Secondary} /> </div>)}
+                        {/* {showMoreButton && (<div><Button className={styles.buttonPageNum} onClick={onClickPageNum} title={'More'} type={ButtonTypes.Secondary} /> </div>)} */}
                     </div>
                 </div>
             </div>

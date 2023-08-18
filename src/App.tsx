@@ -16,7 +16,6 @@ import MultiSelect from './components/Select/MultiSelect.tsx/MultiSelect';
 import { OnChangeValue } from 'react-select';
 import ButtonsGroup from './components/ButtonsGroup/ButtonsGroup';
 import { title } from 'process';
-import Search from './components/Search/Search';
 import Arrow from './components/Arrow/Arrow';
 import Switcher from './components/Switcher/Switcher';
 import Card from './components/Card/Card';

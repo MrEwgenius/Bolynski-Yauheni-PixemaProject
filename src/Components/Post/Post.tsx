@@ -96,7 +96,9 @@ const Post = () => {
 
                 <div className={styles.descriprion}>
 
-                    {singlePost?.plot ? singlePost?.plot.plotText.plainText : 'this prehistoric movie without description'}
+                    {singlePost?.plot && singlePost?.plot.plotText && singlePost?.plot.plotText.plainText
+                        ? singlePost?.plot.plotText.plainText
+                        : 'this prehistoric movie without description'}
 
                 </div>
                 <div className={styles.columnAboutFilm}>
@@ -121,7 +123,7 @@ const Post = () => {
                                 singlePost.releaseDate ? `${singlePost.releaseDate.month}.` : ' - '
                             }
                             {
-                                singlePost.releaseDate ? `${singlePost.releaseDate.year}`: ' - '
+                                singlePost.releaseDate ? `${singlePost.releaseDate.year}` : ' - '
                             }
                         </div>
                         <div >$381,409,310</div>

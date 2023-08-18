@@ -8,8 +8,8 @@
     position: relative;
     .input {
         margin: 0;
-        padding-right: 50px;
-        padding-left: 20px;
+        // padding-right: 50px;
+        // padding-left: 20px;
     }
     .filterIcon {
         position: absolute;
@@ -19,6 +19,7 @@
         top: 50%;
         transform: translateY(-50%);
         cursor: pointer;
+        z-index: 120;
     }
 }
 .dawdaw {

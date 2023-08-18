@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const TrendsIcon = ({
-    width = '24',
+    width = '20',
     height = '24',
     fill = "#ffff",
 }) => {
@@ -9,7 +9,7 @@ export const TrendsIcon = ({
         <svg
             width={width}
             height={height}
-            viewBox="3 0 24 24"
+            viewBox="5 0 17 22"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >

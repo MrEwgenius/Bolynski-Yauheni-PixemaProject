@@ -1,11 +1,11 @@
 
-import { all, takeLatest, call, put, select } from "redux-saga/effects";
+import { all, takeLatest, call, put, select, delay } from "redux-saga/effects";
 
 import { ApiResponse } from 'apisauce'
 
 import API from "src/utils/api";
-import { MovieListTypes, MoviePostData, MovieTypes, PostsData } from "src/@types";
-import { getPostsList, getPostsListTrends, getSinglePost, setPostsList, setPostsListTrends, setSinglePost, updateShowMoreButton } from "../redusers/postSlice";
+import { GetSearchedPostsPayload, MovieListTypes, MoviePostData, MovieTypes, PostsData } from "src/@types";
+import { getPostsList, getPostsListTrends, getSearchedPosts, getSinglePost, setPostsList, setPostsListTrends, setSearchedPosts, setSinglePost, updateShowMoreButton } from "../redusers/postSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GetPostsPayload, GetPostsResponsData } from "../@types";
 import { Rootstate } from "../store";
@@ -45,16 +45,12 @@ function* getPostsWorkers() {
 function* getPostsWorkersTrends() {
     yield put(updateShowMoreButton(true)) //показываем кнопку MORE при получении постов
 
-    const startYear: number | undefined = yield select((state: Rootstate) => state.postReduser.startYear);
-    const endYear: number | undefined = yield select((state: Rootstate) => state.postReduser.endYear);
     const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNumTrend);
 
 
     const response: ApiResponse<PostsData | null> = yield call(
         API.getPostsTrend,
         pageNum,
-        startYear,
-        endYear,
 
     )
     if (response.data) {
@@ -85,6 +81,28 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
         console.error('Problem', response.problem);
     }
     yield put(updateShowMoreButton(false))
+}
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
+
+    yield delay(500)
+    const {  title, isOverwrite } = action.payload
+
+    const response: ApiResponse<GetPostsResponsData> = yield call(
+        API.getSearchPosts,
+        title,
+
+    )
+    if (response.data && response.ok) {
+        const { results, count, } = response.data
+        yield put(
+            setSearchedPosts({
+                movieList: results,
+                isOverwrite,
+            })
+        )
+    } else {
+        console.log('Searched Posts Error');
+    }
 }
 
 // function* getMyPostsWorker() {
@@ -124,6 +142,7 @@ export default function* postSagaWatcher() {
         takeLatest(getPostsList, getPostsWorkers),
         takeLatest(getSinglePost, getSinglePostWorker),
         takeLatest(getPostsListTrends, getPostsWorkersTrends),
+        takeLatest(getSearchedPosts, getSearchedPostsWorker),
         // takeLatest(getMyPosts, getMyPostsWorker),
     ])
 }

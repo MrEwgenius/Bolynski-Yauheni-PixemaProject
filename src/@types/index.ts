@@ -138,3 +138,16 @@ export enum SaveStatus {
     NotSaved = 'notSaved',
 
 }
+
+export type GetSearchedPostsPayload = {
+    title: string,
+    isOverwrite: boolean,
+}
+
+export type SetPostsListPayload = {
+    movieList: MovieListTypes,
+    isOverwrite: boolean,
+
+}
+
+export type SetSearchedPostsPayload = SetPostsListPayload

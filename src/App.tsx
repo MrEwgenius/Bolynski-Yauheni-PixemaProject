@@ -101,10 +101,11 @@ const App = () => {
     //switcher
     // const [themeValue, setThemeValue] = useState(Theme.Light)
 
-    const themeValue = useSelector(ThemeSelectors.getThemeValue)
+    // const themeValue = useSelector(ThemeSelectors.getThemeValue)
+    const [themeValue, setThemeValue] = useState<Theme>(Theme.Dark);
     const onChangeTheme = (value: Theme) => {
-        // setThemeValue(value)
-        dispatch(setThemeValue(value))
+        setThemeValue(value)
+        // dispatch(setThemeValue(value))
     }
 
 

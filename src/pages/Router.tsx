@@ -6,6 +6,7 @@ import PagesContainer from "./PagesContainer/PagesContainer";
 import Home from "./Home/Home";
 import Search from "src/components/Search/Search";
 import SearchList from "./SearchList/SearchList";
+import Settings from "./Settings/Settings";
 // import Search from "src/components/Search/Search";
 
 
@@ -34,7 +35,7 @@ const Router = () => {
                     <Route path={RoutesList.Home} element={<Home />} />
                     <Route path={RoutesList.Trend} element={<Home />} />
                     <Route path={RoutesList.Favorites} element={<Home />} />
-                    <Route path={RoutesList.Setings} element={<SignIn />} />
+                    <Route path={RoutesList.Setings} element={<Settings />} />
                     <Route path={RoutesList.Post} element={<Post />} />
                     <Route
                         path={RoutesList.Default}

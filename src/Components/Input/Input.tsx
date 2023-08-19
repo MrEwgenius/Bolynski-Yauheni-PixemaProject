@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React, { ChangeEvent, FC, KeyboardEvent, LegacyRef, forwardRef } from 'react';
 
 import styles from "./Input.module.scss";
+import { useThemeContext } from 'src/context/Theme/Context';
+import { Theme } from 'src/@types';
 
 type InputProps = {
     title?: string,
@@ -29,9 +31,11 @@ const Input: FC<InputProps> = ({
         onChange(event.target.value)
     }
 
-
+    const { themeValue } = useThemeContext();
     return (
-        <div className={classNames(styles.container, className)}>
+        <div className={classNames(styles.container, className , {
+            [styles.lightContainer]: themeValue === Theme.Light
+        })}>
             {title && <div className={styles.title}>{title}</div>}
             <input className={classNames(styles.input, {
                 [styles.disabled]: disabled,

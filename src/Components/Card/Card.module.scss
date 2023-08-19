@@ -1,6 +1,7 @@
 @import "/src/styles/colors.scss";
 @import "/src/styles/mixin.scss";
 
+
 .containerCard {
     width: 266px;
     display: flex;
@@ -71,4 +72,27 @@
         font-weight: 500;
         line-height: 24px;
     }
+}
+
+.lightContainer {
+       
+        .imageContainer {
+            .rating {
+                color: $dark;
+                background-color: $green;
+            }
+            .bookmark {
+                background-color: $dark;
+            }
+        }
+        .name {
+            color: $dark;
+            &:hover {
+                color: $primary;
+            }
+        }
+        .genere {
+            color: $secondary;
+        }
+    
 }

@@ -13,11 +13,14 @@ import { setThemeValue } from 'src/redux/redusers/themeSlice';
 import { Theme } from 'src/@types';
 import Button, { ButtonTypes } from 'src/components/Button/Button';
 import { imgDefault } from 'src/img';
+import { useThemeContext } from 'src/context/Theme/Context';
 
 
 const Header = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const { themeValue } = useThemeContext();
 
     const [isOpenFilter, setIsOpenFilter] = useState(false)
     const handleFilterOpened = () => {
@@ -75,9 +78,11 @@ const Header = () => {
     return (
         <div>
             <div
-                className={styles.containerHeader}
+                className={classNames(styles.containerHeader, {
+                    [styles.lightContainer]: themeValue === Theme.Light
+                })}
             >
-                <LogoIcon />
+                <LogoIcon fillRight={themeValue === Theme.Light ? '#80858B' : 'white'} />
                 <div className={styles.containerWrapper}>
                     <div className={styles.inputContainer}>
                         <Search
@@ -92,7 +97,7 @@ const Header = () => {
 
                         {!!searchedPosts.length && isDropdownOpened && (
                             <div className={styles.dropdown}>
-                                {searchedPosts.map(({ primaryImage, id, titleText,releaseYear }) => (
+                                {searchedPosts.map(({ primaryImage, id, titleText, releaseYear }) => (
                                     <div
                                         key={id}
                                         onClick={() => { onClickDropdownOpenedItem(id) }}

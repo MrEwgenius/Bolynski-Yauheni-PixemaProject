@@ -2,6 +2,8 @@ import React, { FC, useState } from "react";
 import classNames from "classnames";
 import styles from "./Username.module.scss";
 import { ArrowDownIcon, ArrowRightIcon, UserIcon } from "src/assets/icons";
+import { useThemeContext } from "src/context/Theme/Context";
+import { Theme } from "src/@types";
 type UsernameProps = {
     username: string;
     className?: string;
@@ -31,17 +33,21 @@ const Username: FC<UsernameProps> = ({ username, className }) => {
 
     }
 
+    const { themeValue } = useThemeContext();
 
 
     return (
         <div>
-            <div className={classNames(className, styles.container)}>
+            <div className={classNames(className, styles.container, {
+                [styles.lightContainer]: themeValue === Theme.Light
+
+            })}>
                 <div className={styles.initials}>
                     {username ? initials.toUpperCase() : <UserIcon />}
                 </div>
                 <div className={styles.username}>{username ? username : 'Sign In'}</div>
                 <div onClick={!username ? arrowMenuOpened : handleMenuOpened} className={styles.iconContainer}>
-                    {username ? <ArrowDownIcon /> : <ArrowRightIcon />}
+                    {username ? <ArrowDownIcon fill={themeValue === Theme.Light ? '#000000' : 'white'} /> : <ArrowRightIcon />}
                 </div>
             </div >
             {active ? <div className={styles.activeEditContainer}>

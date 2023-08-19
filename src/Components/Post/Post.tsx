@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useState, useEffect } from 'react';
 import styles from './Post.module.scss'
 import TabsList from '../TabsList/TabsList';
-import { MenuTypes, MovieTypes, SaveStatus, TabsTypes } from 'src/@types';
+import { MenuTypes, MovieTypes, SaveStatus, TabsTypes, Theme } from 'src/@types';
 import { FavoritesIcon, SharowIcon } from 'src/assets/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostSelectors, getRandomPostsList, getSinglePost, setSavedStatus } from 'src/redux/redusers/postSlice';
@@ -10,6 +10,8 @@ import { imgDefault } from 'src/img';
 import { useCardActions } from 'src/hooks';
 import Card from '../Card/Card';
 import Title from '../Title/Title';
+import { useThemeContext } from 'src/context/Theme/Context';
+import classNames from 'classnames';
 
 
 // interface PostProps extends MovieTypes {
@@ -74,10 +76,12 @@ const Post = () => {
 
     const genreText = singlePost?.genres?.genres.map(genre => genre.text).join(' • ');
 
-
+    const { themeValue } = useThemeContext()
     return singlePost && randomPostList ? (
         <div >
-            <div className={styles.containerMainPost}>
+            <div className={classNames(styles.containerMainPost, {
+                [styles.lightContainer]: themeValue === Theme.Light
+            })}>
                 <div className={styles.leftContainer}>
                     <img className={styles.poster} src={singlePost.primaryImage ? singlePost?.primaryImage.url : imgDefault} />
                     <div className={styles.savedBtns}>
@@ -140,25 +144,25 @@ const Post = () => {
                             <div >-</div>
                         </div>
                     </div>
-            <div className={styles.containerRandomMovies}  >
-                <Title 
-                className={styles.title}
-                 title={'Random Movies'} />
-                <div className={styles.RandomMovies}>
-                    {randomPostList.map((el) => {
-                        return (
-                            <div className={styles.random}>
-                                <Card
-                                    key={el.id}
-                                    {...el}
-                                    onSavedClick={onSavedStatus(el)}
-                                    className={styles.card}
-                                />
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
+                    <div className={styles.containerRandomMovies}  >
+                        <Title
+                            className={styles.title}
+                            title={'Random Movies'} />
+                        <div className={styles.RandomMovies}>
+                            {randomPostList.map((el) => {
+                                return (
+                                    <div className={styles.random}>
+                                        <Card
+                                            key={el.id}
+                                            {...el}
+                                            onSavedClick={onSavedStatus(el)}
+                                            className={styles.card}
+                                        />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -45,6 +45,8 @@ function* getPostsWorkers() {
 function* getPostsWorkersTrends() {
     yield put(updateShowMoreButton(true)) //показываем кнопку MORE при получении постов
 
+
+    
     const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNumTrend);
 
 

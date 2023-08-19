@@ -5,9 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PostSelectors, getSearchedPosts } from 'src/redux/redusers/postSlice';
 import styles from './SearchList.module.scss'
 import Title from 'src/components/Title/Title';
-import Card from 'src/components/Card/Card';
-import { useCardActions } from 'src/hooks';
-import Button, { ButtonTypes } from 'src/components/Button/Button';
 import CardList from 'src/components/CardList/CardList';
 import Loader from 'src/components/Loader/Loader';
 
@@ -35,7 +32,6 @@ const SearchList = () => {
         <div className={styles.containerSearchList}>
             <Title
                 title={`Search results: "${title}" found ${searchedPosts.length} matches`}
-                className={styles.title}
             />
             <div className={styles.container} id="scrollableDiv">
 

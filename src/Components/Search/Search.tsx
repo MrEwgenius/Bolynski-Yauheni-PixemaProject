@@ -6,6 +6,10 @@ import SelectedFilterModal from 'src/pages/SelectedFilterModal/SelectedFilterMod
 import { useNavigate } from 'react-router-dom';
 import { PostSelectors, clearSearchedPosts, getSearchedPosts } from 'src/redux/redusers/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
+import { setThemeValue } from 'src/redux/redusers/themeSlice';
+import { Theme } from 'src/@types';
+import { useThemeContext } from 'src/context/Theme/Context';
 
 type SearchProps = {
     title?: string,
@@ -72,8 +76,13 @@ const Search: FC<SearchProps> = ({
     const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         onChange(event.target.value)
     }
+    const { themeValue } = useThemeContext();
     return (
-        <div className={styles.container}>
+        <div
+        className={classNames(styles.container, {
+            [styles.lightContainer]: themeValue === Theme.Light
+        })}
+        >
             <Input
                 placeholder='Search...'
                 onChange={onChange}
@@ -86,7 +95,7 @@ const Search: FC<SearchProps> = ({
                 onClick={onClick}
                 className={styles.filterIcon}
             >
-                <FilterIcon fill={disabled ? '#AFB2B6' : 'white'} />
+                <FilterIcon fill={themeValue === Theme.Light ? '#242426' : 'white'} />
             </div>
 
             {/* {isOpenFilter && <SelectedFilterModal onClick={onclick} />} */}

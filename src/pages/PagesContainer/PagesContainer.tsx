@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import styles from './PagesContainer.module.scss'
 import Header from '../Header/Header';
 import MenuTabsList from 'src/components/MenuTabs/MenuTabsList';
-import { MenuTypes, SaveStatus } from 'src/@types';
+import { MenuTypes, SaveStatus, Theme } from 'src/@types';
 import { FavoritesIcon, GroupIcon, ShapeIcon, TrendsIcon } from 'src/assets/icons';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { RoutesList } from '../Router';
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPostsList, getPostsListTrends, setActiveTabSlice, setSavedStatus, updatePageNum, updatePageNumTrend, updateShowMoreButton } from 'src/redux/redusers/postSlice';
 import { Rootstate } from 'src/redux/store';
 import classNames from 'classnames';
+import { useThemeContext } from 'src/context/Theme/Context';
 
 const PagesContainer = () => {
     // const tabsList = useMemo(
@@ -94,8 +95,12 @@ const PagesContainer = () => {
 
 
     const pageNum = useSelector((state: Rootstate) => state.postReduser.pageNum);
+
+    const { themeValue } = useThemeContext();
     return (
-        <div className={styles.containerHome}>
+        <div className={classNames(styles.containerHome, {
+            [styles.lightContainer]: themeValue === Theme.Light
+        })}>
             <Header />
             <div className={styles.containerWrapper}>
                 <div className={styles.linkWrapper}>

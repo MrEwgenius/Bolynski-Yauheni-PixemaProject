@@ -54,8 +54,32 @@
     border-color: $error;
 }
 
-// .darkContainer {
-//   .title {
-//     color: $white;
-//   }
-// }
+
+
+.lightContainer{
+    .input {
+        background-color: $light;
+        color: $black;
+    
+        &:focus {
+            border-color: $primary;
+        }
+        &:active {
+            border: 2px solid transparent;
+        }
+        &::placeholder {
+            color: $secondary;
+        }
+    }
+    
+    .disabled {
+        background-color: $secondary;
+        &::placeholder {
+            color: $light;
+        }
+    }
+    
+    .title {
+        color: $dark;
+    }
+}

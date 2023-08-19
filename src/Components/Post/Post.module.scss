@@ -111,5 +111,49 @@
 }
 
 .containerRandomMovies {
-    
+}
+
+.lightContainer {
+        .leftContainer {
+
+            .savedBtns {
+            }
+            .poster {
+              
+            }
+        }
+        .rightContainer {
+            
+            .genres {
+                
+                color: $light;
+            }
+            .title {
+                color: $dark;
+               
+            }
+            .rating {
+               
+                color: $dark;
+            }
+            .descriprion {
+                color: $dark;
+                
+            }
+            .columnAboutFilm {
+                .titleCharacteristics {
+                    color: $dark;
+                }
+                .characteristics {
+                    color: $dark;
+                }
+            }
+        }
+
+    .runTime {
+        background-color: $graphite;
+        color: $white;
+    }
+
+   
 }

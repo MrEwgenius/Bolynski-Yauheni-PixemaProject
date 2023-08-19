@@ -13,7 +13,7 @@
     flex: 1;
     // width: 100%;
     // margin: auto;
-    gap:80px;
+    gap: 80px;
     overflow-y: auto;
 }
 .scrollContainer {
@@ -71,7 +71,6 @@
         align-items: center;
         gap: 20px;
         width: 150px;
-       
     }
 }
 
@@ -79,5 +78,32 @@
     color: $primary;
     path {
         fill: $primary;
+    }
+}
+
+.lightContainer {
+    background-color: #fff;
+
+    .navLinkButton {
+        color: $dark;
+        background-color: $light;
+        border-radius: 10px;
+        path {
+            fill: $dark;
+        }
+        &:hover {
+            path {
+                fill: $primary;
+            }
+            color: $primary;
+        }
+       
+    }
+
+    .activeNavButton {
+        color: $primary;
+        path {
+            fill: $primary;
+        }
     }
 }

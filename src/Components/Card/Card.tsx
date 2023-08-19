@@ -5,8 +5,9 @@ import { imgDefault } from 'src/img';
 import { useDispatch, useSelector } from 'react-redux';
 import { PostSelectors, getSinglePost, updateShowMoreButton } from 'src/redux/redusers/postSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MenuTypes, MovieTypes, SaveStatus } from 'src/@types';
+import { MenuTypes, MovieTypes, SaveStatus, Theme } from 'src/@types';
 import classNames from 'classnames';
+import { useThemeContext } from 'src/context/Theme/Context';
 
 
 
@@ -19,7 +20,7 @@ interface CardProps extends MovieTypes {
 
 
 const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleText, primaryImage, className }) => {
-
+    const { themeValue } = useThemeContext();
     const dispatch = useDispatch()
     const savedPosts = useSelector(PostSelectors.getSavedPosts)
 
@@ -42,7 +43,9 @@ const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleTe
 
     return (
         <div
-            className={classNames(styles.containerCard , className)}
+            className={classNames(styles.containerCard, className, {
+                [styles.lightContainer]: themeValue === Theme.Light
+            })}
         >
             <div className={styles.imageContainer}>
                 <img className={styles.poster} src={primaryImage?.url ? primaryImage?.url : imgDefault} alt="img" />

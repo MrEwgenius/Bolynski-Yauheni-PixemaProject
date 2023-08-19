@@ -69,3 +69,36 @@
     }
   }
 }
+
+.lightContainer {
+  .initials {
+    background: $primary;
+    color: $white;
+  }
+
+  .username {
+    color: $dark;
+  }
+  .activeEditContainer {
+    position: relative;
+    .wrapUserContainer {
+      background-color: $dark;
+      .editContainer {
+
+        color: $white;
+        border-bottom: 1px solid $graphite;
+        &:hover {
+          color: $primary;
+        }
+      }
+      .logOutContainer {
+        color: $white;
+
+        &:hover {
+          color: $primary;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

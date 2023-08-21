@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CardList from 'src/components/CardList/CardList';
-import { PostSelectors, getPostsList, getPostsListTrends } from 'src/redux/redusers/postSlice';
-import styles from './Home.module.scss'
-import { MenuTypes } from 'src/@types';
-import { LOCAL_STORAGE_KEY } from 'src/utils/constants';
-import { json } from 'stream/consumers';
-import { RoutesList } from '../Router';
-import { Route, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
+import CardList from 'src/components/CardList/CardList';
+import { PostSelectors, getPostsList, getPostsListTrends, setSavedStatus } from 'src/redux/redusers/postSlice';
+
+import styles from './Home.module.scss'
+import { RoutesList } from '../Router';
 
 const Home = () => {
 
@@ -19,10 +17,7 @@ const Home = () => {
     const allPosts = useSelector(PostSelectors.getPostsList)
     const trendsPosts = useSelector(PostSelectors.getPostsListTrends)
     const savedPosts = useSelector(PostSelectors.getSavedPosts)
-    // const activeTab = useSelector(PostSelectors.getActiveTab);
 
-    const lokStorSet = localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedPosts))
-    let lokStorGet = localStorage.getItem(LOCAL_STORAGE_KEY);
 
     useEffect(() => {
 
@@ -31,18 +26,8 @@ const Home = () => {
 
     }, [])
 
-    // const cardLister = () => {
-    //     switch (activeTab) {
-    //         case MenuTypes.Favoristes:
-    //             return savedPosts;
-    //         case MenuTypes.Home:
-    //             return allPosts;
-    //         case MenuTypes.Trends:
-    //             return trendsPosts;
-    //         default:
-    //             return [];
-    //     }
-    // }
+
+
     const cardLister = () => {
         switch (activeTab) {
             case RoutesList.Favorites:
@@ -55,7 +40,6 @@ const Home = () => {
                 return [];
         }
     }
-    // console.log(trendsPosts);
 
 
     return (

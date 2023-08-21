@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import ReactModal from 'react-modal';
+
 import { Children } from 'src/@types';
 
 type ModalProps =

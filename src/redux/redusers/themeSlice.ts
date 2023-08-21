@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Theme } from "src/@types";
 import { Rootstate } from "../store";
+import { LOCAL_STORAGE_THEME } from "src/utils/constants";
 
 
 type InitialState = {
@@ -10,7 +11,7 @@ type InitialState = {
 
 
 const initialState: InitialState = {
-    themeValue: Theme.Light
+    themeValue: Theme.Dark
 }
 
 const themeSlice = createSlice({
@@ -19,6 +20,9 @@ const themeSlice = createSlice({
     reducers: {
         setThemeValue: (state, action: PayloadAction<Theme>) => {
             state.themeValue = action.payload
+            localStorage.setItem(LOCAL_STORAGE_THEME, action.payload);
+            
+
         }
     }
 })

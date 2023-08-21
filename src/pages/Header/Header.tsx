@@ -1,19 +1,18 @@
 import React, { KeyboardEvent, useEffect, useState } from 'react';
-import styles from './Header.module.scss'
-import { CloseIcon, LogoIcon, MenuIcon } from 'src/assets/icons';
-import Search from 'src/components/Search/Search';
-import Username from 'src/components/Username/Username';
-import SelectedFilterModal from '../SelectedFilterModal/SelectedFilterModal';
-import Input from 'src/components/Input/Input';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PostSelectors, clearSearchedPosts, getSearchedPosts } from 'src/redux/redusers/postSlice';
 import classNames from 'classnames';
-import { setThemeValue } from 'src/redux/redusers/themeSlice';
+
+import { LogoIcon } from 'src/assets/icons';
+import Search from 'src/components/Search/Search';
+import Username from 'src/components/Username/Username';
+import { PostSelectors, clearSearchedPosts, getSearchedPosts } from 'src/redux/redusers/postSlice';
 import { Theme } from 'src/@types';
-import Button, { ButtonTypes } from 'src/components/Button/Button';
 import { imgDefault } from 'src/img';
 import { useThemeContext } from 'src/context/Theme/Context';
+
+import styles from './Header.module.scss'
+import SelectedFilterModal from '../SelectedFilterModal/SelectedFilterModal';
 
 
 const Header = () => {
@@ -28,7 +27,6 @@ const Header = () => {
     }
 
 
-    const [isSearch, setSearch] = useState(false)
     const [isOpened, setOpened] = useState(false)
     const [isDropdownOpened, setDropdownOpened] = useState(false)
     const [inpValue, setinpValue] = useState('')
@@ -59,9 +57,9 @@ const Header = () => {
 
 
 
-    const handleMenuOpened = () => {
-        setOpened(!isOpened)
-    }
+    // const handleMenuOpened = () => {
+    //     setOpened(!isOpened)
+    // }
 
     useEffect(() => {
         if (inpValue.length) {

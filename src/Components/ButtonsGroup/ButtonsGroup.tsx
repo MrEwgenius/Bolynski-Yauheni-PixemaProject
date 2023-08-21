@@ -1,8 +1,9 @@
 import React, { FC, ReactNode } from 'react';
-import styles from './ButtonsGroup.module.scss'
 import classNames from 'classnames';
+
 import { ButtonGroupList } from 'src/@types';
-import { title } from 'process';
+
+import styles from './ButtonsGroup.module.scss'
 
 
 

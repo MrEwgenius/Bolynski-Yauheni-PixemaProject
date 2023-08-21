@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import React, { ChangeEvent, FC, KeyboardEvent, LegacyRef, forwardRef } from 'react';
+import React, { ChangeEvent, FC, KeyboardEvent } from 'react';
 
-import styles from "./Input.module.scss";
 import { useThemeContext } from 'src/context/Theme/Context';
 import { Theme } from 'src/@types';
+
+import styles from "./Input.module.scss";
 
 type InputProps = {
     title?: string,
@@ -33,7 +34,7 @@ const Input: FC<InputProps> = ({
 
     const { themeValue } = useThemeContext();
     return (
-        <div className={classNames(styles.container, className , {
+        <div className={classNames(styles.container, className, {
             [styles.lightContainer]: themeValue === Theme.Light
         })}>
             {title && <div className={styles.title}>{title}</div>}

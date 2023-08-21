@@ -1,9 +1,12 @@
 import React from 'react';
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
 import { GetSearchedPostsPayload, MenuTypes, MovieListTypes, MovieTypes, SaveStatus, SetSearchedPostsPayload } from 'src/@types';
+import { LOCAL_STORAGE_KEY } from 'src/utils/constants';
+
 import { Rootstate } from '../store';
-import { GetPostsPayload } from '../@types';
+
+let lokStorGet = localStorage.getItem(LOCAL_STORAGE_KEY)
 
 type initialState = {
     selectedPost: MovieListTypes,
@@ -11,6 +14,7 @@ type initialState = {
     selectedPostFilterYear: MovieListTypes,
     selectedPostTrends: MovieListTypes,
     singlePost: MovieTypes | null,
+    budgetPost: MovieTypes | null,
     pageNum: number;
     pageNumTrend: number;
     showMoreButton: boolean;
@@ -22,6 +26,7 @@ type initialState = {
     searchedPosts: MovieListTypes,
     totalSearchedCount: number,
 
+
 }
 
 const initialState: initialState = {
@@ -30,16 +35,18 @@ const initialState: initialState = {
     selectedPostFilterYear: [],
     selectedPostTrends: [],
     singlePost: null,
+    budgetPost: null,
     pageNum: 12,
     pageNumTrend: 12,
     showMoreButton: true,
     myPosts: [],
-    savedPosts: [],
+    savedPosts: lokStorGet ? JSON.parse(lokStorGet) : [],
     activeTab: MenuTypes.Home,
     startYear: undefined,
     endYear: undefined,
     searchedPosts: [],
     totalSearchedCount: 0,
+
 
 };
 const postSlice = createSlice({
@@ -67,6 +74,10 @@ const postSlice = createSlice({
         setSinglePost: (state, action: PayloadAction<MovieTypes>) => {
             state.singlePost = action.payload;
         },
+        getBudgetPost: (_, __: PayloadAction<string>) => { },
+        setBudgetPost: (state, action: PayloadAction<MovieTypes>) => {
+            state.budgetPost = action.payload;
+        },
 
         updatePageNum: (state, action: PayloadAction<number>) => {
             state.pageNum = action.payload;
@@ -80,15 +91,19 @@ const postSlice = createSlice({
         },
 
         setSavedStatus: (state, action: PayloadAction<{ card: MovieTypes, status: SaveStatus }>) => {
+
             const { card, status } = action.payload;
             const savedIndex = state.savedPosts.findIndex(item => item.id === card.id)
             const isSaved = status === SaveStatus.Saved
             const mainIndex = isSaved ? savedIndex : 1
+
             mainIndex === -1 ?
                 state.savedPosts.push(card)
 
                 :
                 state.savedPosts.splice(mainIndex, 1)
+
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state.savedPosts))
 
         },
 
@@ -159,6 +174,8 @@ export const {
     setSearchedPosts,
     getRandomPostsList,
     setRandomPostsList,
+    getBudgetPost,
+    setBudgetPost,
 
 } = postSlice.actions
 
@@ -168,6 +185,7 @@ export const PostSelectors = {
     getPostsFilterList: (state: Rootstate) => state.postReduser.selectedPostFilterYear,
     getPostsListTrends: (state: Rootstate) => state.postReduser.selectedPostTrends,
     getSinglePost: (state: Rootstate) => state.postReduser.singlePost,
+    getBudgetPost: (state: Rootstate) => state.postReduser.budgetPost,
     getSavedPosts: (state: Rootstate) => state.postReduser.savedPosts,
     getActiveTab: (state: Rootstate) => state.postReduser.activeTab,
     getSearchedPosts: (state: Rootstate) => state.postReduser.searchedPosts,

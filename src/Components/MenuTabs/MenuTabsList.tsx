@@ -1,7 +1,9 @@
 import React, { FC, ReactNode } from 'react';
+
+import { MenuListType, MenuTypes } from 'src/@types';
+
 import styles from './MenuTabsList.module.scss'
 import MenuTab from './MenuTab/MenuTab';
-import { MenuListType, MenuTypes } from 'src/@types';
 
 
 type TabsListProps = {

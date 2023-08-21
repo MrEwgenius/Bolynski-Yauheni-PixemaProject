@@ -1,13 +1,14 @@
 
 import { all, takeLatest, call, put, select, delay } from "redux-saga/effects";
-
+import { PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponse } from 'apisauce'
 
+
 import API from "src/utils/api";
-import { GetSearchedPostsPayload, MovieListTypes, MoviePostData, MovieTypes, PostsData } from "src/@types";
-import { getPostsList, getPostsListTrends, getRandomPostsList, getSearchedPosts, getSinglePost, setPostsList, setPostsListTrends, setRandomPostsList, setSearchedPosts, setSinglePost, updateShowMoreButton } from "../redusers/postSlice";
-import { PayloadAction } from "@reduxjs/toolkit";
-import { GetPostsPayload, GetPostsResponsData } from "../@types";
+import { GetSearchedPostsPayload, MoviePostData, PostsData } from "src/@types";
+
+import { getPostsList, getPostsListTrends, getRandomPostsList, getSearchedPosts, getSinglePost,  setPostsList, setPostsListTrends, setRandomPostsList, setSearchedPosts, setSinglePost, updateShowMoreButton } from "../redusers/postSlice";
+import { GetPostsResponsData } from "../@types";
 import { Rootstate } from "../store";
 
 
@@ -45,8 +46,6 @@ function* getPostsWorkers() {
 function* getPostsWorkersTrends() {
     yield put(updateShowMoreButton(true)) //показываем кнопку MORE при получении постов
 
-
-    
     const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNumTrend);
 
 
@@ -69,9 +68,96 @@ function* getPostsWorkersTrends() {
 }
 
 
+// function* getSinglePostWorker(action: PayloadAction<string>) {
+
+
+
+
+
+
+
+//     yield put(updateShowMoreButton(true))
+
+
+//     // const [mainFilmResponse, directorsResponse]: ApiResponse<Post> = yield all([call(
+//     //     API.getSinglePost,
+//     //     action.payload
+//     // ), call(API.getDirectors)];
+
+//     // const result = {
+//     //     directors: directorsResponse.results.directors,
+//     //     mainInfo: {
+//     //         ...mainFilmResponse.results
+//     //     }
+//     // }
+
+
+//     const [singleBaseInfo, singleBudget]: [ApiResponse<MoviePostData | null>, ApiResponse<MoviePostData | null>]
+//         = yield all([
+//             call(API.getBudget, action.payload),
+//             call(API.getSinglePost, action.payload),
+//         ])
+
+//         if (singleBaseInfo.ok && singleBaseInfo.data) {
+//             yield put(
+//                 setSinglePost(singleBaseInfo.data.results)
+//                 )
+
+
+//             } else {
+//                 console.error('Problem', singleBaseInfo.problem);
+//             }
+//             if (singleBudget.ok && singleBudget.data) {
+//         yield put(
+//             setBudgetPost(singleBudget.data.results)
+//             )
+
+//         } else {
+//             console.error('Problem', singleBudget.problem);
+//         }
+//         const result = {
+//             directors: singleBudget.data?.results,
+//             ...singleBaseInfo.data?.results
+//         }
+
+//     // if (singleBaseInfo.ok && singleBaseInfo.data && singleBudget.ok && singleBudget.data) {
+//     //     yield put(setSinglePost(result))
+//     // }
+
+
+
+//     yield put(updateShowMoreButton(false))
+
+
+
+//     // const response: ApiResponse<MoviePostData | null> = yield call(
+//     //     API.getSinglePost,
+//     //     action.payload
+//     // )
+//     // if (response.ok && response.data) {
+//     //     yield put(setSinglePost(response.data.results))
+
+//     // } else {
+//     //     console.error('Problem', response.problem);
+//     // }
+//     // yield put(updateShowMoreButton(false))
+
+
+
+
+
+
+
+
+
+
+
+// }
 function* getSinglePostWorker(action: PayloadAction<string>) {
 
     yield put(updateShowMoreButton(true))
+
+
     const response: ApiResponse<MoviePostData | null> = yield call(
         API.getSinglePost,
         action.payload
@@ -83,7 +169,12 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
         console.error('Problem', response.problem);
     }
     yield put(updateShowMoreButton(false))
+
+
 }
+
+
+
 function* getSearchedPostsWorker(action: PayloadAction<GetSearchedPostsPayload>) {
 
     yield delay(500)
@@ -113,7 +204,6 @@ function* getRandomPostsWorkers() {
 
 
 
-    const pageNum: number = yield select((state: Rootstate) => state.postReduser.pageNum);
 
     const response: ApiResponse<PostsData | null> = yield call(
         API.getRandomPosts,

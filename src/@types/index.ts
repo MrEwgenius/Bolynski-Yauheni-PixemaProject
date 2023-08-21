@@ -1,4 +1,3 @@
-import { type } from 'os';
 import React, { ReactElement, ReactNode } from 'react';
 
 export enum TabsTypes {
@@ -113,9 +112,69 @@ export type MovieTypes = {
         year: number
         __typename: string
     }
+    productionBudget: {
+        budget: {
+            amount: number,
+            currency: string,
+        },
+    },
+    lifetimeGross: {
+        total: {
+            amount: number,
+            currency: string,
+        },
+    },
+    openingWeekendGross: {
+        gross: {
+            total: {
+                amount: number,
+                currency: string,
+            },
+        },
+    },
+    worldwideGross: {
+        total: {
+            amount: number,
+            currency: string,
+        },
+    }
     // }
 
 }
+
+
+export type MovieBudget = {
+    id: string,
+    productionBudget: {
+        budget: {
+            amount: number,
+            currency: string,
+        },
+    },
+    lifetimeGross: {
+        total: {
+            amount: number,
+            currency: string,
+        },
+    },
+    openingWeekendGross: {
+        gross: {
+            total: {
+                amount: number,
+                currency: string,
+            },
+        },
+    },
+    worldwideGross: {
+        total: {
+            amount: number,
+            currency: string,
+        },
+    }
+
+}
+
+
 // export type CardListType = CardType[];
 export type MovieListTypes = MovieTypes[];
 

@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import styles from "./Arrow.module.scss";
 import classNames from 'classnames';
+
 import { ArrowIcon } from 'src/assets/icons';
+
+import styles from "./Arrow.module.scss";
 
 type ArrowProps = {
     disabled?: boolean;

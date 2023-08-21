@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode, FC } from 'react';
-import styles from "./MenuTab.module.scss";
 import classNames from 'classnames';
+
+import styles from "./MenuTab.module.scss";
 
 
 

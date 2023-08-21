@@ -1,13 +1,15 @@
-import React, { FC, useEffect } from 'react'
-import styles from './Card.module.scss'
+import React, { FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
+
 import { FavoritesIcon } from 'src/assets/icons';
 import { imgDefault } from 'src/img';
-import { useDispatch, useSelector } from 'react-redux';
-import { PostSelectors, getSinglePost, updateShowMoreButton } from 'src/redux/redusers/postSlice';
-import { useNavigate, useParams } from 'react-router-dom';
-import { MenuTypes, MovieTypes, SaveStatus, Theme } from 'src/@types';
-import classNames from 'classnames';
+import { PostSelectors,  updateShowMoreButton } from 'src/redux/redusers/postSlice';
+import {  MovieTypes, SaveStatus, Theme } from 'src/@types';
 import { useThemeContext } from 'src/context/Theme/Context';
+
+import styles from './Card.module.scss'
 
 
 
@@ -34,7 +36,6 @@ const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleTe
     }
 
 
-    // const genre = genres.genres.map((el) => { el.text })
 
     const genreText = genres?.genres?.map(genre => genre.text).join(' • ');
 
@@ -49,7 +50,11 @@ const Card: FC<CardProps> = ({ onSavedClick, genres, ratingsSummary, id, titleTe
         >
             <div className={styles.imageContainer}>
                 <img className={styles.poster} src={primaryImage?.url ? primaryImage?.url : imgDefault} alt="img" />
-                <div className={styles.rating}>{ratingsSummary.aggregateRating ? ratingsSummary.aggregateRating : '0'}</div>
+                <div className={styles.rating}>
+                    {ratingsSummary?.aggregateRating
+                        ? ratingsSummary.aggregateRating
+                        : '0'}
+                </div>
                 <div
                     className={styles.bookmark}
                     onClick={() => onSavedClick(SaveStatus.Saved)}

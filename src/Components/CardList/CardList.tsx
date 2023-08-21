@@ -1,15 +1,15 @@
-import React, { FC, useState, useEffect } from 'react';
-import Card from '../Card/Card';
-import { MovieListTypes } from 'src/@types';
-import styles from './CardList.module.scss'
-import InfiniteScroll from 'react-infinite-scroll-component';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PostSelectors, getPostsList, getPostsListTrends, getSinglePost, updatePageNum, updatePageNumTrend, updateShowMoreButton } from 'src/redux/redusers/postSlice';
-import { useParams } from 'react-router-dom';
+
 import { useCardActions } from 'src/hooks';
+import { MovieListTypes } from 'src/@types';
+import { getPostsList, getPostsListTrends, updatePageNum, updatePageNumTrend } from 'src/redux/redusers/postSlice';
 import emptyListe from 'src/img/emptyList.png'
-import Button, { ButtonTypes } from '../Button/Button';
 import { Rootstate } from 'src/redux/store';
+
+import Card from '../Card/Card';
+import styles from './CardList.module.scss'
+import Button, { ButtonTypes } from '../Button/Button';
 
 
 

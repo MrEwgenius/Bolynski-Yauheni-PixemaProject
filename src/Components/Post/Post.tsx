@@ -1,23 +1,21 @@
-import React, { FC, useMemo, useState, useEffect } from 'react';
-import styles from './Post.module.scss'
-import TabsList from '../TabsList/TabsList';
-import { MenuTypes, MovieTypes, SaveStatus, TabsTypes, Theme } from 'src/@types';
-import { FavoritesIcon, SharowIcon } from 'src/assets/icons';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PostSelectors, getRandomPostsList, getSinglePost, setSavedStatus } from 'src/redux/redusers/postSlice';
 import { useParams } from 'react-router-dom';
-import { imgDefault } from 'src/img';
-import { useCardActions } from 'src/hooks';
-import Card from '../Card/Card';
-import Title from '../Title/Title';
-import { useThemeContext } from 'src/context/Theme/Context';
 import classNames from 'classnames';
 
+import { FavoritesIcon, SharowIcon } from 'src/assets/icons';
+import { PostSelectors, getBudgetPost, getRandomPostsList, getSinglePost } from 'src/redux/redusers/postSlice';
+import { SaveStatus, TabsTypes, Theme } from 'src/@types';
+import { imgDefault } from 'src/img';
+import { useCardActions } from 'src/hooks';
+import { useThemeContext } from 'src/context/Theme/Context';
 
-// interface PostProps extends MovieTypes {
-//     onSavedClick: (status: SaveStatus) => void,
+import styles from './Post.module.scss'
+import TabsList from '../TabsList/TabsList';
+import Card from '../Card/Card';
+import Title from '../Title/Title';
 
-// }
+
 
 
 const Post = () => {
@@ -29,12 +27,14 @@ const Post = () => {
         if (id) {
             dispatch(getRandomPostsList())
             dispatch(getSinglePost(id))
+            dispatch(getBudgetPost(id))
         }
     }, [id])
     const randomPostList = useSelector(PostSelectors.getRandomPostsList)
-    console.log(randomPostList);
 
     const singlePost = useSelector(PostSelectors.getSinglePost)
+    const budgetPost = useSelector(PostSelectors.getBudgetPost)
+
     const { onSavedStatus } = useCardActions()
 
     const [activeTab, setActiveTab] = useState(TabsTypes.Left);
@@ -95,7 +95,7 @@ const Post = () => {
                 </div>
                 <div className={styles.rightContainer}>
                     <div className={styles.genres} >{genreText}</div>
-                    <div className={styles.title}> {singlePost.titleText.text}</div>
+                    <div className={styles.title}> {singlePost?.titleText?.text}</div>
                     <div className={styles.ratingTuntimeContainer}>
                         <div
                             className={styles.rating}>
@@ -151,7 +151,7 @@ const Post = () => {
                         <div className={styles.RandomMovies}>
                             {randomPostList.map((el) => {
                                 return (
-                                    <div className={styles.random}>
+                                    <div key={el.id} className={styles.random}>
                                         <Card
                                             key={el.id}
                                             {...el}

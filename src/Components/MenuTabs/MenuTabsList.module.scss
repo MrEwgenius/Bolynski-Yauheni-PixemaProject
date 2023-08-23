@@ -1,0 +1,20 @@
+@import "/src/styles/colors.scss";
+@import "/src/styles/mixin.scss";
+
+.containerMenuTabs {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+.menuWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1;
+}
+.footer {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: $light;
+}

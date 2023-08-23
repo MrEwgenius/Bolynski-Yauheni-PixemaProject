@@ -1,0 +1,25 @@
+@import "/src/styles/colors.scss";
+
+.containerCardList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    gap: 50px;
+}
+.buttonPageNum {
+    margin: auto;
+    width: 100px;
+}
+.containerEmpty {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-size: 20px;
+    color: $secondary;
+    font-weight: 600;
+    line-height: 32px;
+}

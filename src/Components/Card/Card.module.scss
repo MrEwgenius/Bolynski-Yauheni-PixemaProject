@@ -1,0 +1,98 @@
+@import "/src/styles/colors.scss";
+@import "/src/styles/mixin.scss";
+
+
+.containerCard {
+    width: 266px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 450px;
+    .imageContainer {
+        height: 357px;
+        margin-bottom: 24px;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+            flex: 1;
+            object-fit: contain;
+        }
+        .poster {
+        }
+        .rating {
+            position: absolute;
+            color: $white;
+            top: 20px;
+            left: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            background-color: $green;
+            border-radius: 6px;
+            width: 37px;
+            height: 28px;
+            @include flexCentr;
+            cursor: pointer;
+        }
+        .bookmark {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 28px;
+            border-radius: 6px;
+            background-color: $dark;
+            @include flexCentr;
+            cursor: pointer;
+        }
+    }
+    .name {
+        color: $white;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        cursor: pointer;
+        word-wrap: break-word;
+        // display: inline-flex;
+        &:hover {
+            color: $primary;
+        }
+    }
+    .genere {
+        display: inline-flex;
+
+        // cursor: pointer;
+        color: $light;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+}
+
+.lightContainer {
+       
+        .imageContainer {
+            .rating {
+                color: $dark;
+                background-color: $green;
+            }
+            .bookmark {
+                background-color: $dark;
+            }
+        }
+        .name {
+            color: $dark;
+            &:hover {
+                color: $primary;
+            }
+        }
+        .genere {
+            color: $secondary;
+        }
+    
+}

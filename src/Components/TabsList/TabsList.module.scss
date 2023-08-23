@@ -5,7 +5,35 @@
     @include flexCentr;
     border-radius: 10px;
     height: 56px;
-    width: 438px;
+    // overflow: hidden;
+    // width: 266px;
     background-color: $graphite;
-    display: flex;
+    padding: 1px;
+    // background-color: #fff;
+}
+.tabs {
+    flex: 1;
+    @include flexCentr;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 15px;
+    &:hover {
+        color: $white;
+    }
+    &:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+}
+
+.activeTab {
+    color: $secondary;
+    background-color: $dark;
+}
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: $white;
+    margin-bottom: 10px;
 }

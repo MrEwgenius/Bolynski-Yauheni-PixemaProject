@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
-import styles from './Button.module.scss'
 import classNames from 'classnames';
+
+import styles from './Button.module.scss'
 
 
 export enum ButtonTypes {
@@ -13,16 +14,23 @@ type ButtonProps = {
     title: string | ReactElement,
     onClick: () => void,
     disabled?: boolean,
+    className?: string
 }
 
 
-const Button: FC<ButtonProps> = ({ type, title, onClick, disabled }) => {
+const Button: FC<ButtonProps> = ({
+    type,
+    title,
+    onClick,
+    className,
+    disabled
+}) => {
 
     const buttonStyle = styles[type]
 
     return (
         <div
-            className={classNames(buttonStyle, { [styles.disabled]: disabled })}
+            className={classNames(buttonStyle, className, { [styles.disabled]: disabled })}
             onClick={!disabled ? onClick : undefined}
         >
             {title}

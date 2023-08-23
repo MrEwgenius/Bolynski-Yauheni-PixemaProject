@@ -1,0 +1,15 @@
+export { ArrowDownIcon } from "./ArrowDownIcon";
+export { ArrowIcon } from "./ArrowIcon";
+export { ArrowRightIcon } from "./ArrowRightIcon";
+export { CheckIcon } from "./CheckIcon";
+export { CloseIcon } from "./CloseIcon";
+export { DeleteIcon } from "./DeleteIcon";
+export { FavoritesIcon } from "./FavoritesIcon";
+export { FilterIcon } from "./FilterIcon";
+export { GroupIcon } from "./GroupIcon";
+export { MenuIcon } from "./MenuIcon";
+export { ShapeIcon } from "./ShapeIcon";
+export { SharowIcon } from "./SharowIcon";
+export { UserIcon } from "./UserIcon";
+export { TrendsIcon } from "./TrendsIcon";
+export { LogoIcon } from "./LogoIcon";

@@ -1,0 +1,11 @@
+@import "/src/styles/colors.scss";
+
+.containerArrow {
+  cursor: pointer;
+  width: 23px;
+  height: 23px;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
